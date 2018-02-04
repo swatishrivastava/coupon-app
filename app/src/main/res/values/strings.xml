@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CouponApp</string>
+    <string name="enter_user_name">Enter user name</string>
+    <string name="enter_email">Enter email</string>
+
+    <string name="enter_password">Enter Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up_label">Not an user yet?</string>
+
+</resources>
