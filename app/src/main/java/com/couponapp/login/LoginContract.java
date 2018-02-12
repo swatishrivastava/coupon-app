@@ -7,8 +7,7 @@ import com.couponapp.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView<Presenter> {
-        void signInSuccessful();
-
+        void signInSuccessful(UserPojo userPojo);
         void signInFailed();
 
     }
@@ -18,6 +17,6 @@ public interface LoginContract {
                     String password);
 
         void signUp(String email,
-                    String password);
+                    String password, String name);
     }
 }
