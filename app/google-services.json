@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1060290557629-bjeuscsul70mjmkbd7uo8p4vm9q9j40c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.couponapp",
+            "certificate_hash": "b52df3f0f6898cab1a909844f072799bb8370cca"
+          }
+        },
+        {
           "client_id": "1060290557629-563avigr04b6j5sl5nugd094m0gprh5b.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060290557629-563avigr04b6j5sl5nugd094m0gprh5b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

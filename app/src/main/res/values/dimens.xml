@@ -1,0 +1,69 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="corner_radius">1dp</dimen>
+    <dimen name="layer_padding">0dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+    <dimen name="logo_subtitle_text_size">20dp</dimen>
+    <dimen name="_20dp">20dp</dimen>
+    <dimen name="_15dp">15dp</dimen>
+    <dimen name="_10dp">10dp</dimen>
+    <dimen name="_200dp">200dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="left_margin_for_installation_value">35dp</dimen>
+    <dimen name="start_margin_for_installation_value">35dp</dimen>
+    <dimen name="left_margin_for_installation_label">20dp</dimen>
+    <dimen name="start_margin_for_installation_label">20dp</dimen>
+    <dimen name="right_margin_for_service_issue_value">55dp</dimen>
+    <dimen name="end_margin_for_service_issue_value">55dp</dimen>
+    <dimen name="right_margin_for_service_issue_label">30dp</dimen>
+    <dimen name="end_margin_for_service_issue_label">30dp</dimen>
+    <dimen name="_2dp">2dp</dimen>
+
+    <!-- Navigation Drawer -->
+    <dimen name="navigation_drawer_max_width">320dp</dimen>
+
+    <dimen name="navigation_drawer_profile_image_size">64dp</dimen>
+    <dimen name="navigation_drawer_item_height">48dp</dimen>
+    <dimen name="navigation_drawer_account_section_default_height">164dp</dimen>
+    <dimen name="navigation_drawer_account_information_height">56dp</dimen>
+    <dimen name="nav_drawer_vertical_keyline_icon_left">16dp</dimen>
+    <dimen name="nav_drawer_vertical_keyline_text_left">42dp</dimen>
+    <dimen name="nav_drawer_vertical_keyline_right">16dp</dimen>
+    <dimen name="nav_drawer_item_row_height">48dp</dimen>
+    <dimen name="nav_drawer_item_row_icon_size">24dp</dimen>
+    <dimen name="nav_drawer_vertical_spacing_listing">8dp</dimen>
+    <dimen name="nav_drawer_vertical_spacing_listing_divider_top">7dp</dimen>
+    <dimen name="nav_drawer_vertical_spacing_listing_divider_bottom">8dp</dimen>
+    <dimen name="nav_drawer_subheader_height">48dp</dimen>
+
+
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="text_size_20">20dp</dimen>
+    <dimen name="text_size_10">10dp</dimen>
+    <dimen name="_3dp">3dp</dimen>
+    <dimen name="text_size_15">15dp</dimen>
+    <dimen name="tab_text_size">4dp</dimen>
+    <dimen name="customer_name_text_size">10dp</dimen>
+    <dimen name="_0dp">0dp</dimen>
+    <dimen name="installation_wizard_tab_text_size">25dp</dimen>
+    <dimen name="_300dp">300dp</dimen>
+    <dimen name="_250dp">250dp</dimen>
+    <dimen name="_30dp">30dp</dimen>
+    <dimen name="_150dp">150dp</dimen>
+    <dimen name="_50dp">50dp</dimen>
+    <dimen name="_18dp">18dp</dimen>
+    <dimen name="_5dp">5dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
+    <dimen name="_25dp">25dp</dimen>
+    <dimen name="_60dp">60dp</dimen>
+    <dimen name="_65dp">65dp</dimen>
+    <dimen name="_tablayoutTextSize">12dp</dimen>
+    <dimen name="_42dp">42dp</dimen>
+</resources>

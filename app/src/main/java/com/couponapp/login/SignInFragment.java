@@ -9,78 +9,98 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.couponapp.home.HomeActivity;
+import com.couponapp.home.DealsHomeActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import example.couponapp.com.couponapp.R;
 
 
 public class SignInFragment extends Fragment implements LoginContract.View {
 
+    @BindView(R.id.editText_username)
+    EditText editTextUsername;
+    @BindView(R.id.editText_email)
+    EditText editTextEmail;
+    @BindView(R.id.editText_password)
+    EditText editTextPassword;
+    @BindView(R.id.editText_confirm_password)
+    EditText editTextConfirmPassword;
+    @BindView(R.id.sign_in_btn)
+    Button signInBtn;
+    @BindView(R.id.sign_up_btn)
+    Button signUpBtn;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.sigh_in)
+    TextView sighIn;
+    @BindView(R.id.sigh_in_label)
+    TextView sighInLabel;
+    Unbinder unbinder;
     private LoginContract.Presenter presenterObj;
-    private EditText editText_username;
-    private EditText editText_email;
-    private EditText editText_password;
-    private EditText editText_confirm_password;
-    private Button   sign_in_button;
-    private Button   sign_up_button;
-    private TextView sign_up_label;
 
     public static SignInFragment newInstance() {
         return new SignInFragment();
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.login_layout, container, false);
-        initializeView(root);
+        unbinder = ButterKnife.bind(this, root);
+        initializeView();
         return root;
     }
 
-    private void initializeView(View view){
-        editText_email =view.findViewById(R.id.editText_email);
-        editText_password=view.findViewById(R.id.editText_password);
-        editText_username=view.findViewById(R.id.editText_username);
-        editText_confirm_password=view.findViewById(R.id.editText_confirm_password);
-        sign_in_button=view.findViewById(R.id.sign_in_btn);
-        sign_up_button=view.findViewById(R.id.sign_up_btn);
-        sign_up_label=view.findViewById(R.id.sigh_in_label);
-        sign_in_button.setOnClickListener(new View.OnClickListener() {
+    private void initializeView() {
+        signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenterObj.sighIn(editText_email.getText().toString(), editText_password.getText().toString());
+                presenterObj.sighIn(editTextEmail.getText()
+                                            .toString(), editTextPassword.getText()
+                                            .toString());
+                signInBtn.setVisibility(View.INVISIBLE);
             }
         });
 
 
-        sign_up_button.setOnClickListener(new View.OnClickListener() {
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenterObj.signUp(editText_email.getText().toString(), editText_password.getText().toString());
+                presenterObj.signUp(editTextEmail.getText()
+                                            .toString(), editTextPassword.getText()
+                                            .toString(), editTextUsername.getText()
+                                            .toString());
+                signInBtn.setVisibility(View.INVISIBLE);
+                signUpBtn.setVisibility(View.INVISIBLE);
+
             }
         });
 
-        sign_up_label.setOnClickListener(new View.OnClickListener() {
+        sighInLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText_username.setVisibility(View.VISIBLE);
-                editText_confirm_password.setVisibility(View.VISIBLE);
-                sign_up_button.setVisibility(View.VISIBLE);
-                sign_in_button.setVisibility(View.GONE);
+                editTextUsername.setVisibility(View.VISIBLE);
+                editTextConfirmPassword.setVisibility(View.VISIBLE);
+                signUpBtn.setVisibility(View.VISIBLE);
+                signInBtn.setVisibility(View.GONE);
             }
         });
     }
 
 
-    private void clearAllViews(){
-        editText_username.clearComposingText();
-        editText_confirm_password.clearComposingText();
-        editText_email.clearComposingText();
-        editText_password.clearComposingText();
+    private void clearAllViews() {
+        editTextUsername.clearComposingText();
+        editTextConfirmPassword.clearComposingText();
+        editTextEmail.clearComposingText();
+        editTextPassword.clearComposingText();
     }
 
     @Override
@@ -91,25 +111,34 @@ public class SignInFragment extends Fragment implements LoginContract.View {
 
     @Override
     public void setPresenter(LoginContract.Presenter presenter) {
-     this.presenterObj=presenter;
+        this.presenterObj = presenter;
 
     }
 
     @Override
-    public void signInSuccessful() {
-        Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
+    public void signInSuccessful(UserPojo userPojo) {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT)
+                .show();
         clearAllViews();
-        Intent intent = new Intent(getContext(), HomeActivity.class);
+        Intent intent = new Intent(getContext(), DealsHomeActivity.class);
+        intent.putExtra(DealsHomeActivity.USER_INFO, userPojo);
         startActivity(intent);
     }
 
     @Override
     public void signInFailed() {
-        Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_SHORT)
+                .show();
         clearAllViews();
 
     }
 
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
