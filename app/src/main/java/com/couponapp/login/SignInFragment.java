@@ -116,13 +116,13 @@ public class SignInFragment extends Fragment implements LoginContract.View {
     }
 
     @Override
-    public void signInSuccessful(UserPojo userPojo) {
+    public void signInSuccessful(UserInfo userInfo) {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT)
                 .show();
         clearAllViews();
         Intent intent = new Intent(getContext(), DealsHomeActivity.class);
-        intent.putExtra(DealsHomeActivity.USER_INFO, userPojo);
+        intent.putExtra(DealsHomeActivity.USER_INFO, userInfo);
         startActivity(intent);
     }
 

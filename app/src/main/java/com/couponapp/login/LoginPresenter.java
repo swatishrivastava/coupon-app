@@ -52,7 +52,6 @@ public class LoginPresenter implements LoginContract.Presenter {
                             getUserInfo(user.getUid());
 
                         } else {
-                            System.out.print("failed reason " + task.isSuccessful());
                             view.signInFailed();
                         }
                     }
@@ -69,9 +68,9 @@ public class LoginPresenter implements LoginContract.Presenter {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            UserPojo userPojo = saveUserInfo(task.getResult()
+                            UserInfo userInfo = saveUserInfo(task.getResult()
                                                                      .getUser(), name);
-                            view.signInSuccessful(userPojo);
+                            view.signInSuccessful(userInfo);
 
                         } else {
                             view.signInFailed();
@@ -82,14 +81,14 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
 
-    private UserPojo saveUserInfo(FirebaseUser user,
+    private UserInfo saveUserInfo(FirebaseUser user,
                                   String displayName) {
-        UserPojo userDetailPojo = new UserPojo();
+        UserInfo userDetailPojo = new UserInfo();
         userDetailPojo.setEmail(user.getEmail());
         userDetailPojo.setId(user.getUid());
         userDetailPojo.setName(displayName);
-        userDetailPojo.setRole("consumer");
-        DatabaseReference mDatabase = database.getReference("Users");
+        userDetailPojo.setRole(LoginConstants.CONSUMER);
+        DatabaseReference mDatabase = database.getReference(LoginConstants.USERS_TABLE);
         String userId = mDatabase.push()
                 .getKey();
         mDatabase.child(userId)
@@ -99,29 +98,27 @@ public class LoginPresenter implements LoginContract.Presenter {
 
 
     private void getUserInfo(String id) {
-        Log.e("test", " User id == " + id);
-        DatabaseReference databaseReference = database.getReference("Users");
-        Query query = databaseReference.orderByChild("id")
+        DatabaseReference databaseReference = database.getReference(LoginConstants.USERS_TABLE);
+        Query query = databaseReference.orderByChild(LoginConstants.USER_ID)
                 .equalTo(id);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("test", " data for user===  " + dataSnapshot);
                 for (com.google.firebase.database.DataSnapshot user : dataSnapshot.getChildren()) {
-                    UserPojo userPojo = new UserPojo();
-                    userPojo.setRole(user.child("role")
+                    UserInfo userInfo = new UserInfo();
+                    userInfo.setRole(user.child(LoginConstants.USER_ROLE)
                                              .getValue()
                                              .toString());
-                    userPojo.setName(user.child("name")
+                    userInfo.setName(user.child(LoginConstants.USER_NAME)
                                              .getValue()
                                              .toString());
-                    view.signInSuccessful(userPojo);
+                    view.signInSuccessful(userInfo);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("test", "error  data for user===  " + databaseError);
+                Log.e(LoginPresenter.class.getSimpleName(), "error  data for user===  " + databaseError);
 
             }
         });

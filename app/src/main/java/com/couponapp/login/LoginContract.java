@@ -7,7 +7,7 @@ import com.couponapp.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView<Presenter> {
-        void signInSuccessful(UserPojo userPojo);
+        void signInSuccessful(UserInfo userInfo);
         void signInFailed();
 
     }

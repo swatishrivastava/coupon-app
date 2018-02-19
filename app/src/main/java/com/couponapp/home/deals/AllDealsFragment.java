@@ -38,6 +38,8 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
     private AllDealFragmentAdapter allSiteFragmentCardViewAdapter;
     private String categoryName;
 
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

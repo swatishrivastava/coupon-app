@@ -17,17 +17,23 @@ import android.view.MenuItem;
 
 import com.couponapp.admin.AddNewDealActivity;
 import com.couponapp.login.LoginActivity;
-import com.couponapp.login.UserPojo;
+import com.couponapp.login.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import example.couponapp.com.couponapp.R;
 
+
+/*
+https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=28.460153,77.028852&radius=5000&type=food&key=AIzaSyCU8vmk_MqiIh29tdQBNqqXSqHR3NeI4TY
+*/
+
 public class DealsHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String USER_INFO = "USER_INFO";
+    public static final String ADMIN = "ADMIN";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tab_layout)
@@ -43,7 +49,7 @@ public class DealsHomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deals_home_layout);
-        UserPojo userInfo = getIntent().getParcelableExtra(USER_INFO);
+        UserInfo userInfo = getIntent().getParcelableExtra(USER_INFO);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -64,9 +70,10 @@ public class DealsHomeActivity extends AppCompatActivity
     }
 
 
-    private void showAdminFeature(UserPojo userInfo, Menu nav_Menu){
+    private void showAdminFeature(UserInfo userInfo,
+                                  Menu nav_Menu) {
         if (userInfo.getRole() != null && userInfo.getRole()
-                .equalsIgnoreCase("ADMIN")) {
+                .equalsIgnoreCase(ADMIN)) {
             nav_Menu.findItem(R.id.add_deal)
                     .setVisible(true);
         } else {

@@ -21,7 +21,6 @@
     <string name="add_deal_btn_label">Add deal</string>
     <string name="progress_text">Getting data</string>
 
-
     <string-array name="category_array">
         <item>Food and drink</item>
         <item>Movies</item>

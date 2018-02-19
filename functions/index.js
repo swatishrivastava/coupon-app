@@ -12,8 +12,8 @@ exports.pushNotification=functions.database.ref('/Deals/{pushId}').onWrite(event
      const payload={
 
 notification:{
-    title: 'test notification',
-    body: 'test notify',
+    title: 'New exciting deal',
+    body: valueObj.description,
     sound: "default"
 },
 
