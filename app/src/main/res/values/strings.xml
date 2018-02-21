@@ -6,7 +6,12 @@
     <string name="enter_password">Enter Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_in">Sign In</string>
+    <string name="skip">Skip login</string>
+    <string name="login_successful_msg">Login successful!</string>
+    <string name="login_failed_msg">Login failed!</string>
+    <string name="correct_credential_msg">Please enter correct credential.</string>
     <string name="sign_up">SIGN UP</string>
+
     <string name="sign_up_label">Not an user yet?</string>
     <string name="title_activity_deals_home">DealsHomeActivity</string>
 
@@ -20,6 +25,7 @@
     <string name="category_tab_label">Category</string>
     <string name="add_deal_btn_label">Add deal</string>
     <string name="progress_text">Getting data</string>
+    <string name="deal_saved">Deal saved</string>
 
     <string-array name="category_array">
         <item>Food and drink</item>

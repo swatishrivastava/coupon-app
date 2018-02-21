@@ -54,11 +54,19 @@ public class LoginPresenterTest {
                 .setPresenter(loginPresenter);
     }
 
+    @Test
+    public void testForEmptyCredential() {
+        loginPresenter.sighIn("", "");
+        Mockito.verify(loginView)
+                .showToastForCorrectCredentials();
+    }
+
 
     @Test
     public void verifySignIn() {
         Mockito.when(
-                firebaseAuth.signInWithEmailAndPassword(Mockito.anyString(), Mockito.anyString())).thenReturn(task);
+                firebaseAuth.signInWithEmailAndPassword(Mockito.anyString(), Mockito.anyString()))
+                .thenReturn(task);
         loginPresenter.sighIn("test@test.com", "test");
 
         Mockito.verify(firebaseAuth)
@@ -68,8 +76,9 @@ public class LoginPresenterTest {
 
     @Test
     public void verifySignUp() {
-        Mockito.when(
-                firebaseAuth.createUserWithEmailAndPassword(Mockito.anyString(), Mockito.anyString())).thenReturn(task);
+        Mockito.when(firebaseAuth.createUserWithEmailAndPassword(Mockito.anyString(),
+                                                                 Mockito.anyString()))
+                .thenReturn(task);
         loginPresenter.signUp("test@test.com", "test", "test");
 
         Mockito.verify(firebaseAuth)

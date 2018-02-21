@@ -21,7 +21,7 @@ import butterknife.Unbinder;
 import example.couponapp.com.couponapp.R;
 
 
-public class SignInFragment extends Fragment implements LoginContract.View {
+public class SignInFragment extends Fragment implements LoginContract.View, View.OnClickListener {
 
     @BindView(R.id.editText_username)
     EditText editTextUsername;
@@ -42,6 +42,8 @@ public class SignInFragment extends Fragment implements LoginContract.View {
     @BindView(R.id.sigh_in_label)
     TextView sighInLabel;
     Unbinder unbinder;
+    @BindView(R.id.skip_login)
+    Button skipLogin;
     private LoginContract.Presenter presenterObj;
 
     public static SignInFragment newInstance() {
@@ -60,47 +62,19 @@ public class SignInFragment extends Fragment implements LoginContract.View {
     }
 
     private void initializeView() {
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenterObj.sighIn(editTextEmail.getText()
-                                            .toString(), editTextPassword.getText()
-                                            .toString());
-                signInBtn.setVisibility(View.INVISIBLE);
-            }
-        });
-
-
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenterObj.signUp(editTextEmail.getText()
-                                            .toString(), editTextPassword.getText()
-                                            .toString(), editTextUsername.getText()
-                                            .toString());
-                signInBtn.setVisibility(View.INVISIBLE);
-                signUpBtn.setVisibility(View.INVISIBLE);
-
-            }
-        });
-
-        sighInLabel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editTextUsername.setVisibility(View.VISIBLE);
-                editTextConfirmPassword.setVisibility(View.VISIBLE);
-                signUpBtn.setVisibility(View.VISIBLE);
-                signInBtn.setVisibility(View.GONE);
-            }
-        });
+        signInBtn.setOnClickListener(this);
+        signUpBtn.setOnClickListener(this);
+        sighInLabel.setOnClickListener(this);
+        skipLogin.setOnClickListener(this);
     }
 
 
     private void clearAllViews() {
-        editTextUsername.clearComposingText();
-        editTextConfirmPassword.clearComposingText();
-        editTextEmail.clearComposingText();
-        editTextPassword.clearComposingText();
+        editTextUsername.setText("");
+        editTextConfirmPassword.setText("");
+        editTextEmail.setText("");
+        editTextPassword.setText("");
+        sighIn.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -118,9 +92,14 @@ public class SignInFragment extends Fragment implements LoginContract.View {
     @Override
     public void signInSuccessful(UserInfo userInfo) {
         progressBar.setVisibility(View.GONE);
-        Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT)
+        Toast.makeText(getActivity(), getString(R.string.login_successful_msg), Toast.LENGTH_SHORT)
                 .show();
         clearAllViews();
+        startDealActivity(userInfo);
+    }
+
+
+    private void startDealActivity(UserInfo userInfo) {
         Intent intent = new Intent(getContext(), DealsHomeActivity.class);
         intent.putExtra(DealsHomeActivity.USER_INFO, userInfo);
         startActivity(intent);
@@ -129,10 +108,18 @@ public class SignInFragment extends Fragment implements LoginContract.View {
     @Override
     public void signInFailed() {
         progressBar.setVisibility(View.GONE);
-        Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_SHORT)
+        Toast.makeText(getActivity(), getString(R.string.login_failed_msg), Toast.LENGTH_SHORT)
                 .show();
         clearAllViews();
 
+    }
+
+    @Override
+    public void showToastForCorrectCredentials() {
+        clearAllViews();
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(getActivity(), getString(R.string.correct_credential_msg), Toast.LENGTH_SHORT)
+                .show();
     }
 
 
@@ -141,4 +128,39 @@ public class SignInFragment extends Fragment implements LoginContract.View {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sign_in_btn: {
+                presenterObj.sighIn(editTextEmail.getText()
+                                            .toString(), editTextPassword.getText()
+                                            .toString());
+                signInBtn.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case R.id.sign_up_btn: {
+
+                presenterObj.signUp(editTextEmail.getText()
+                                            .toString(), editTextPassword.getText()
+                                            .toString(), editTextUsername.getText()
+                                            .toString());
+                signInBtn.setVisibility(View.INVISIBLE);
+                signUpBtn.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case R.id.skip_login: {
+                startDealActivity(new UserInfo());
+            }
+
+            case R.id.sigh_in_label: {
+                editTextUsername.setVisibility(View.VISIBLE);
+                editTextConfirmPassword.setVisibility(View.VISIBLE);
+                signUpBtn.setVisibility(View.VISIBLE);
+                signInBtn.setVisibility(View.GONE);
+            }
+        }
+    }
+
+
 }

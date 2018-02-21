@@ -73,7 +73,6 @@ public class CategoryFragment extends Fragment
 
     @Override
     public void showAllCategory(List<String> categoryList) {
-        Log.e("test", "************inside showCategory method == " + categoryList.size());
         progressBar.setVisibility(View.GONE);
         progressText.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);

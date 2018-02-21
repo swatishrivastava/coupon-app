@@ -43,19 +43,23 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void sighIn(String email,
                        String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            getUserInfo(user.getUid());
+        if (isCredentialEmpty(email, password)) {
+            view.showToastForCorrectCredentials();
+        } else {
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                getUserInfo(user.getUid());
 
-                        } else {
-                            view.signInFailed();
+                            } else {
+                                view.signInFailed();
+                            }
                         }
-                    }
-                });
+                    });
+        }
 
     }
 
@@ -63,21 +67,26 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void signUp(String email,
                        String password,
                        final String name) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            UserInfo userInfo = saveUserInfo(task.getResult()
-                                                                     .getUser(), name);
-                            view.signInSuccessful(userInfo);
+        if (isCredentialEmpty(email, password)) {
+            view.showToastForCorrectCredentials();
+            return;
+        } else {
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                UserInfo userInfo = saveUserInfo(task.getResult()
+                                                                         .getUser(), name);
+                                view.signInSuccessful(userInfo);
 
-                        } else {
-                            view.signInFailed();
+                            } else {
+                                view.signInFailed();
+                            }
+
                         }
-
-                    }
-                });
+                    });
+        }
     }
 
 
@@ -118,10 +127,17 @@ public class LoginPresenter implements LoginContract.Presenter {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(LoginPresenter.class.getSimpleName(), "error  data for user===  " + databaseError);
+                Log.e(LoginPresenter.class.getSimpleName(),
+                      "error  data for user===  " + databaseError);
 
             }
         });
+    }
+
+
+    private boolean isCredentialEmpty(String email,
+                                      String password) {
+        return email== null || email.equalsIgnoreCase("") && password== null || password.equalsIgnoreCase("") ? true : false;
     }
 
 }

@@ -42,8 +42,6 @@ public class AllDealFragmentAdapter
                                                      .getCompanyName().toString());
         holder.textView_discount.setText(dealPojoList.get(position)
                                                  .getDescription().toString());
-        holder.textView_expiry_date.setText(dealPojoList.get(position)
-                                                    .getExpiry_date().toString());
         holder.textView_category.setText(dealPojoList.get(position).getCategory().toString());
         loadImageForLocation(position, holder.deal_company_logo);
 
@@ -68,7 +66,6 @@ public class AllDealFragmentAdapter
 
         public final TextView textView_company_name;
         public final TextView textView_discount;
-        public final TextView textView_expiry_date;
         public final ImageView deal_company_logo;
         public final TextView textView_category;
 
@@ -76,7 +73,6 @@ public class AllDealFragmentAdapter
             super(itemView);
             textView_company_name =  itemView.findViewById(R.id.tv_company_name);
             textView_discount =  itemView.findViewById(R.id.textView_dicount);
-            textView_expiry_date =   itemView.findViewById(R.id.textView_expiry_date);
             deal_company_logo=itemView.findViewById(R.id.deal_company_logo);
             textView_category=itemView.findViewById(R.id.textView_category);
         }

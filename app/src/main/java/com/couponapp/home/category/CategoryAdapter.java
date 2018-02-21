@@ -44,9 +44,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.textView.setText(dataSource.get(position));
         holder.textView.setTag(dataSource.get(position));
         holder.textView.setOnClickListener(this);
-        Log.e("test", "data from array" + dataSource.get(position) + " and text from " +
-                holder.textView.getText()
-                        .toString());
     }
 
     @Override
@@ -64,7 +61,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public void updateList(List<String> categoryList) {
-        Log.e("test", "************* inside Category adapter === " + categoryList.size());
         dataSource.clear();
         dataSource.addAll(categoryList);
         notifyDataSetChanged();

@@ -17,17 +17,11 @@ import example.couponapp.com.couponapp.R;
 
 
 public class DealPushNotificationService extends FirebaseMessagingService {
-
-    private static final String TAG = DealPushNotificationService.class.getSimpleName();
-
+    
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getNotification() != null) {
-            Log.e(TAG, "***********Message Notification Body: ************" +
-                    remoteMessage.getNotification()
-                            .getBody());
-
             sendNotification(remoteMessage.getNotification()
                                      .getTitle(),remoteMessage.getNotification()
                                      .getBody());
@@ -44,9 +38,9 @@ public class DealPushNotificationService extends FirebaseMessagingService {
                                                                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                .setAutoCancel(true)   //Automatically delete the notification
-                .setSmallIcon(R.mipmap.ic_launcher) //Notification icon
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setAutoCancel(true)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationBody)

@@ -91,16 +91,8 @@ public class DealPojo implements Parcelable, Serializable {
         this.category = category;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getExpiry_date() {
-        return expiry_date;
     }
 
     public void setExpiry_date(String expiry_date) {

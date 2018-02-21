@@ -88,7 +88,6 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
 
     @Override
     public void showAllDeals(List<DealPojo> dealPojoList) {
-        Log.e("test", "************inside showAllDeals method == " + dealPojoList.size());
         progressBar.setVisibility(View.GONE);
         progressText.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);

@@ -5,9 +5,6 @@ import com.couponapp.BaseView;
 
 import java.util.List;
 
-/**
- * Created by swatishrivastava on 2/7/2018.
- */
 
 public interface DealContract {
 

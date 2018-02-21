@@ -77,7 +77,7 @@ public class AddNewDealActivity extends AppCompatActivity implements AdminContra
                                         .toString());
         dealPojo.setCategory(spinner.getSelectedItem()
                                      .toString());
-        dealPojo.setCompanyUrl("http://google.com");
+        dealPojo.setCompanyUrl("https://i-cdn.phonearena.com/images/article/51374-image/Deal-tracker-450-LG-G2-440-iPad-mini-4G-free-Disney-games-more-deals-on-phones-tablets-and-apps.jpg");
         dealPojo.setLocation(editTextLocation.getText()
                                      .toString());
         presenter.saveDeal(dealPojo);
@@ -87,7 +87,7 @@ public class AddNewDealActivity extends AppCompatActivity implements AdminContra
 
     @Override
     public void showDealSavedOnUi() {
-        Toast.makeText(this, "Deal saved", Toast.LENGTH_SHORT)
+        Toast.makeText(this, getString(R.string.deal_saved), Toast.LENGTH_SHORT)
                 .show();
     }
 

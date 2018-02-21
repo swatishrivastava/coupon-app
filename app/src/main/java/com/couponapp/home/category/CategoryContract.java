@@ -8,8 +8,8 @@ import java.util.List;
 public interface CategoryContract {
 
     interface View extends BaseView<CategoryContract.Presenter> {
-        void showAllCategory(List<String> categoryList);
-        void showSelectedCategoryDealsUI(String categoryName);
+         void showAllCategory(List<String> categoryList);
+         void showSelectedCategoryDealsUI(String categoryName);
 
     }
 

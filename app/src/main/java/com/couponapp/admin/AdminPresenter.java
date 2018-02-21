@@ -1,5 +1,6 @@
 package com.couponapp.admin;
 
+import com.couponapp.DealConstants;
 import com.couponapp.home.deals.DealPojo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,7 +19,7 @@ public class AdminPresenter implements AdminContract.AdminPresenter {
 
     @Override
     public void saveDeal(DealPojo dealPojo) {
-        DatabaseReference mDatabase = firebaseDatabase.getReference("Deals");
+        DatabaseReference mDatabase = firebaseDatabase.getReference(DealConstants.DEALS);
         String dealId = mDatabase.push()
                 .getKey();
         mDatabase.child(dealId)

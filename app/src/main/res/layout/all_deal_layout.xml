@@ -27,6 +27,7 @@
                 android:layout_marginTop="@dimen/_10dp"
                 android:ellipsize="end"
                 android:singleLine="true"
+                android:textAllCaps="true"
                 android:text="Hello World!"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_20dp"/>
@@ -49,13 +50,6 @@
                 android:layout_margin="@dimen/activity_horizontal_margin"
                 android:text="TextView"/>
 
-            <TextView
-                android:id="@+id/textView_expiry_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/textView_dicount"
-                android:layout_below="@+id/textView_dicount"
-                android:text="TextView"/>
 
             <TextView
                 android:id="@+id/textView_category"
@@ -63,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textView_dicount"
                 android:layout_alignStart="@+id/tv_company_name"
+                android:textSize="@dimen/_10dp"
                 android:text="Category"/>
 
 
