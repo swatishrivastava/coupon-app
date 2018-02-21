@@ -103,6 +103,7 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
         Intent intent = new Intent(getContext(), DealsHomeActivity.class);
         intent.putExtra(DealsHomeActivity.USER_INFO, userInfo);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

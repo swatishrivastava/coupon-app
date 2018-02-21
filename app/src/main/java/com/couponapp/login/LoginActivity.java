@@ -2,6 +2,9 @@ package com.couponapp.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import com.couponapp.home.DealsHomeActivity;
@@ -15,13 +18,13 @@ import example.couponapp.com.couponapp.R;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-
+    private final static String PUSH_NOTIFICATION="pushNotifications" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
-        FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
+        FirebaseMessaging.getInstance().subscribeToTopic(PUSH_NOTIFICATION);
         SignInFragment signInFragment = SignInFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_activity_content_frame, signInFragment,
@@ -41,7 +44,22 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(PUSH_NOTIFICATION);
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        android.support.v4.app.Fragment f =
+                getSupportFragmentManager().findFragmentById(R.id.tab_layout);
+
+        FragmentManager fm = getSupportFragmentManager();
+        int count = fm.getBackStackEntryCount();
+        if (count == 1) {
+            finish();
+        }
+
+        super.onBackPressed();
     }
 }

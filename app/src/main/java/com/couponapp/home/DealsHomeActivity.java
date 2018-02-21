@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.couponapp.admin.AddNewDealActivity;
+import com.couponapp.home.deals.AllDealsFragment;
 import com.couponapp.login.LoginActivity;
 import com.couponapp.login.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
@@ -132,6 +134,17 @@ public class DealsHomeActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        android.support.v4.app.Fragment f =
+                getSupportFragmentManager().findFragmentById(R.id.tab_layout);
+
+        FragmentManager fm = getSupportFragmentManager();
+        int count = fm.getBackStackEntryCount();
+        if (count == 1) {
+            finish();
+        }
+
+        super.onBackPressed();
     }
 
     @Override
@@ -168,5 +181,6 @@ public class DealsHomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }
