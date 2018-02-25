@@ -46,7 +46,6 @@ public class CategoryFragment extends Fragment
         View root = inflater.inflate(R.layout.category_list_layout, container, false);
         recyclerView = root.findViewById(R.id.categories_list);
         setRecycleViewLayoutManager();
-        categoryPresenter = new CategoryPresenter(FirebaseDatabase.getInstance(), this);
         categoryAdapter = new CategoryAdapter(categoryPojoList, this);
         recyclerView.setAdapter(categoryAdapter);
         unbinder = ButterKnife.bind(this, root);

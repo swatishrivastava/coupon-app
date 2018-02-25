@@ -57,7 +57,6 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.category_list_layout, container, false);
         recyclerView = root.findViewById(R.id.categories_list);
-        dealPresenter = new DealPresenter(FirebaseDatabase.getInstance(), this);
         unbinder = ButterKnife.bind(this, root);
         return root;
     }
@@ -96,7 +95,7 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
 
     @Override
     public void setPresenter(DealContract.Presenter presenter) {
-
+        this.dealPresenter= (DealPresenter) presenter;
     }
 
     @Override

@@ -8,6 +8,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.couponapp.home.deals.AllDealsFragment;
+import com.couponapp.home.deals.DealContract;
+import com.couponapp.home.deals.DealPresenter;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,11 +33,12 @@ public class AllDealsOfSelectedCategory extends AppCompatActivity {
         getSupportActionBar().hide();
         String categoryName = getIntent().getStringExtra(EXTRA_CATEGORY_NAME);
         tvTitle.setText(categoryName);
+        AllDealsFragment allDealsFragment=getAllDealsFragment(categoryName);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_activity_content_frame, getAllDealsFragment(categoryName))
+                .replace(R.id.main_activity_content_frame, allDealsFragment)
                 .addToBackStack(AllDealsFragment.TAG)
                 .commit();
-
+        new DealPresenter(FirebaseDatabase.getInstance(),  allDealsFragment);
     }
 
     private AllDealsFragment getAllDealsFragment(String categoryName) {

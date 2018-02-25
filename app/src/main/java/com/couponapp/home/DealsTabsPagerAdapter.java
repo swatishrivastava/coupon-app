@@ -1,50 +1,37 @@
 package com.couponapp.home;
 
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.couponapp.home.category.CategoryFragment;
-import com.couponapp.home.deals.AllDealsFragment;
-import com.couponapp.home.deals.DealPojo;
-
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DealsTabsPagerAdapter extends FragmentPagerAdapter {
 
+    private List<Fragment> fragmentList = new ArrayList<>();
+
     public DealsTabsPagerAdapter(FragmentManager fm) {
         super(fm);
+
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return getAllDealsTabFragment();
-            case 1:
-                return getCategoryTabFragment();
-            default:
-                return null;
-        }
+        return fragmentList.get(position);
     }
 
 
-    private AllDealsFragment getAllDealsTabFragment() {
-        AllDealsFragment allDealsFragment = AllDealsFragment.newInstance();
-        return allDealsFragment;
+    public void addFragments(Fragment fragment) {
+        fragmentList.add(fragment);
+
     }
 
-    private CategoryFragment getCategoryTabFragment() {
-        CategoryFragment categoryFragment = new CategoryFragment();
-        return categoryFragment;
-    }
 
     @Override
     public int getCount() {
-        return 2;
+        return fragmentList.size();
     }
 
 }

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -17,19 +18,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.couponapp.admin.AddNewDealActivity;
+import com.couponapp.home.category.CategoryContract;
+import com.couponapp.home.category.CategoryFragment;
+import com.couponapp.home.category.CategoryPresenter;
 import com.couponapp.home.deals.AllDealsFragment;
+import com.couponapp.home.deals.DealContract;
+import com.couponapp.home.deals.DealPresenter;
 import com.couponapp.login.LoginActivity;
 import com.couponapp.login.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import example.couponapp.com.couponapp.R;
 
 
-/*
-https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=28.460153,77.028852&radius=5000&type=food&key=AIzaSyCU8vmk_MqiIh29tdQBNqqXSqHR3NeI4TY
-*/
+
 
 public class DealsHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -105,6 +110,7 @@ public class DealsHomeActivity extends AppCompatActivity
     private void setViewPagerToTabs() {
         DealsTabsPagerAdapter dealsTabsPagerAdapter =
                 new DealsTabsPagerAdapter(getSupportFragmentManager());
+        setFragmentsInAdapter(dealsTabsPagerAdapter);
         viewpager.setAdapter(dealsTabsPagerAdapter);
         viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -123,6 +129,18 @@ public class DealsHomeActivity extends AppCompatActivity
 
             }
         });
+    }
+
+    private void setFragmentsInAdapter(DealsTabsPagerAdapter dealsTabsPagerAdapter) {
+
+        Fragment categoryFragment = getCategoryTabFragment();
+        Fragment dealsFragment = getAllDealsTabFragment();
+        dealsTabsPagerAdapter.addFragments(dealsFragment);
+        dealsTabsPagerAdapter.addFragments(categoryFragment);
+
+        new DealPresenter(FirebaseDatabase.getInstance(), (DealContract.View) dealsFragment);
+        new CategoryPresenter(FirebaseDatabase.getInstance(),
+                              (CategoryContract.View) categoryFragment);
     }
 
 
@@ -183,4 +201,13 @@ public class DealsHomeActivity extends AppCompatActivity
     }
 
 
+    private AllDealsFragment getAllDealsTabFragment() {
+        AllDealsFragment allDealsFragment = AllDealsFragment.newInstance();
+        return allDealsFragment;
+    }
+
+    private CategoryFragment getCategoryTabFragment() {
+        CategoryFragment categoryFragment = new CategoryFragment();
+        return categoryFragment;
+    }
 }
