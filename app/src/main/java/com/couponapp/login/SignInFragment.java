@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.couponapp.home.DealsHomeActivity;
+import com.couponapp.home.HomeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -108,8 +108,8 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
 
 
     private void startDealActivity(UserInfo userInfo) {
-        Intent intent = new Intent(getContext(), DealsHomeActivity.class);
-        intent.putExtra(DealsHomeActivity.USER_INFO, userInfo);
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        intent.putExtra(HomeActivity.USER_INFO, userInfo);
         startActivity(intent);
         getActivity().finish();
     }

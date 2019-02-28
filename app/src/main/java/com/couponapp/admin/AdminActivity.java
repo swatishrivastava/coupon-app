@@ -26,7 +26,7 @@ import butterknife.OnClick;
 import example.couponapp.com.couponapp.R;
 
 
-public class AddNewDealActivity extends AppCompatActivity implements AdminContract.View {
+public class AdminActivity extends AppCompatActivity implements AdminContract.View {
 
 
     @BindView(R.id.tv_title)

@@ -8,20 +8,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.couponapp.BaseCouponApplication;
+import com.couponapp.application.CouponApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import example.couponapp.com.couponapp.R;
 
-public class AllDealFragmentAdapter
-        extends RecyclerView.Adapter<AllDealFragmentAdapter.DealViewHolder> {
+public class DealFragmentAdapter
+        extends RecyclerView.Adapter<DealFragmentAdapter.DealViewHolder> {
 
     private ArrayList<DealPojo> dealPojoList;
     private View mView;
 
-    public AllDealFragmentAdapter(List<DealPojo> dealPojoListObj) {
+    public DealFragmentAdapter(List<DealPojo> dealPojoListObj) {
         super();
         this.dealPojoList = (ArrayList<DealPojo>) dealPojoListObj;
     }
@@ -49,7 +49,7 @@ public class AllDealFragmentAdapter
 
     private void loadImageForLocation(int position,
                                       ImageView imageView) {
-        Glide.with(BaseCouponApplication.getAppContext())
+        Glide.with(CouponApplication.getAppContext())
                 .load(dealPojoList.get(position)
                               .getCompanyUrl())
                 .placeholder(R.drawable.ic_launcher_background)

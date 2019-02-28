@@ -1,7 +1,7 @@
 package com.couponapp.home.deals;
 
-import com.couponapp.BasePresenter;
-import com.couponapp.BaseView;
+import com.couponapp.application.BasePresenter;
+import com.couponapp.application.BaseView;
 
 import java.util.List;
 

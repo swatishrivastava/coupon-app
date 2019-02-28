@@ -1,7 +1,7 @@
 package com.couponapp.tests.deals;
 
 
-import com.couponapp.DealConstants;
+import com.couponapp.utils.DealConstants;
 import com.couponapp.home.deals.DealContract;
 import com.couponapp.home.deals.DealPresenter;
 import com.google.firebase.database.DatabaseReference;

@@ -1,9 +1,9 @@
-package com.couponapp;
+package com.couponapp.application;
 
 import android.app.Application;
 import android.content.Context;
 
-public class BaseCouponApplication extends Application {
+public class CouponApplication extends Application {
     private static Context appContext;
 
     public static Context getAppContext() {
@@ -16,7 +16,7 @@ public class BaseCouponApplication extends Application {
     }
 
     public static void setAppContext(Context appContext) {
-        BaseCouponApplication.appContext = appContext;
+        CouponApplication.appContext = appContext;
     }
 
 

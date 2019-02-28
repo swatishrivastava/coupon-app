@@ -5,15 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.couponapp.home.category.AllDealsOfSelectedCategory;
-import com.google.firebase.database.FirebaseDatabase;
+import com.couponapp.home.category.CategoryForSelectedDeal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +22,9 @@ import butterknife.Unbinder;
 import example.couponapp.com.couponapp.R;
 
 
-public class AllDealsFragment extends Fragment implements DealContract.View {
+public class DealsFragment extends Fragment implements DealContract.View {
 
-    public static final String TAG = AllDealsFragment.class.getSimpleName();
+    public static final String TAG = DealsFragment.class.getSimpleName();
     @BindView(R.id.categories_list)
     RecyclerView recyclerView;
     @BindView(R.id.progressBar)
@@ -35,7 +33,7 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
     @BindView(R.id.progress_text)
     TextView progressText;
     private DealPresenter dealPresenter;
-    private AllDealFragmentAdapter allSiteFragmentCardViewAdapter;
+    private DealFragmentAdapter allSiteFragmentCardViewAdapter;
     private String categoryName;
 
 
@@ -44,8 +42,8 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null &&
-                getArguments().getString(AllDealsOfSelectedCategory.EXTRA_CATEGORY_NAME) != null) {
-            categoryName = getArguments().getString(AllDealsOfSelectedCategory.EXTRA_CATEGORY_NAME);
+                getArguments().getString(CategoryForSelectedDeal.EXTRA_CATEGORY_NAME) != null) {
+            categoryName = getArguments().getString(CategoryForSelectedDeal.EXTRA_CATEGORY_NAME);
 
         }
     }
@@ -61,8 +59,8 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
         return root;
     }
 
-    public static AllDealsFragment newInstance() {
-        return new AllDealsFragment();
+    public static DealsFragment newInstance() {
+        return new DealsFragment();
     }
 
     @Override
@@ -81,7 +79,7 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
         final LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLinearLayoutManager);
-        allSiteFragmentCardViewAdapter = new AllDealFragmentAdapter(new ArrayList<DealPojo>());
+        allSiteFragmentCardViewAdapter = new DealFragmentAdapter(new ArrayList<DealPojo>());
         recyclerView.setAdapter(allSiteFragmentCardViewAdapter);
     }
 

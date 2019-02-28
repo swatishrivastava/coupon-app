@@ -1,7 +1,7 @@
 package com.couponapp.admin;
 
-import com.couponapp.BasePresenter;
-import com.couponapp.BaseView;
+import com.couponapp.application.BasePresenter;
+import com.couponapp.application.BaseView;
 import com.couponapp.home.deals.DealPojo;
 
 

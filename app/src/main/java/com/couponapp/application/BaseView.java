@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.couponapp;
+package com.couponapp.application;
 
 public interface BaseView<T> {
 

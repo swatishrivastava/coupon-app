@@ -1,6 +1,6 @@
 package com.couponapp.admin;
 
-import com.couponapp.DealConstants;
+import com.couponapp.utils.DealConstants;
 import com.couponapp.home.deals.DealPojo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

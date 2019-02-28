@@ -7,14 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +80,8 @@ public class CategoryFragment extends Fragment
 
     @Override
     public void showSelectedCategoryDealsUI(String categoryName) {
-        Intent intent = new Intent(getContext(), AllDealsOfSelectedCategory.class);
-        intent.putExtra(AllDealsOfSelectedCategory.EXTRA_CATEGORY_NAME, categoryName);
+        Intent intent = new Intent(getContext(), CategoryForSelectedDeal.class);
+        intent.putExtra(CategoryForSelectedDeal.EXTRA_CATEGORY_NAME, categoryName);
         startActivity(intent);
     }
 

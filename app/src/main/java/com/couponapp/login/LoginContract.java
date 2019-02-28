@@ -1,8 +1,8 @@
 package com.couponapp.login;
 
 
-import com.couponapp.BasePresenter;
-import com.couponapp.BaseView;
+import com.couponapp.application.BasePresenter;
+import com.couponapp.application.BaseView;
 
 public interface LoginContract {
 

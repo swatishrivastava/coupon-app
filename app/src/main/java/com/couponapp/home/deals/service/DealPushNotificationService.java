@@ -1,4 +1,4 @@
-package com.couponapp.service;
+package com.couponapp.home.deals.service;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,8 +8,8 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.couponapp.BaseCouponApplication;
-import com.couponapp.home.DealsHomeActivity;
+import com.couponapp.application.CouponApplication;
+import com.couponapp.home.HomeActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -30,7 +30,7 @@ public class DealPushNotificationService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String notificationTitle, String notificationBody) {
-        Intent intent = new Intent(this, DealsHomeActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                                                                 PendingIntent.FLAG_ONE_SHOT);
@@ -46,7 +46,7 @@ public class DealPushNotificationService extends FirebaseMessagingService {
 
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(
-                BaseCouponApplication.getAppContext().NOTIFICATION_SERVICE);
+                CouponApplication.getAppContext().NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, notificationBuilder.build());
     }

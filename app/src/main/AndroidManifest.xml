@@ -3,7 +3,7 @@
           package="example.couponapp.com.couponapp">
 
     <application
-        android:name="com.couponapp.BaseCouponApplication"
+        android:name="com.couponapp.application.CouponApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,17 +12,17 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.couponapp.home.DealsHomeActivity"
+            android:name="com.couponapp.home.HomeActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="com.couponapp.admin.AddNewDealActivity"
+            android:name="com.couponapp.admin.AdminActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.couponapp.home.category.AllDealsOfSelectedCategory"
+            android:name="com.couponapp.home.category.CategoryForSelectedDeal"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme"></activity>
         <activity android:name="com.couponapp.login.LoginActivity" >
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.couponapp.service.DealPushNotificationService">
+        <service android:name="com.couponapp.home.deals.service.DealPushNotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
             </intent-filter>

@@ -2,7 +2,7 @@ package com.couponapp.home.deals;
 
 import android.util.Log;
 
-import com.couponapp.DealConstants;
+import com.couponapp.utils.DealConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

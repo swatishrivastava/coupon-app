@@ -16,13 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.couponapp.admin.AddNewDealActivity;
+import com.couponapp.admin.AdminActivity;
 import com.couponapp.home.category.CategoryContract;
 import com.couponapp.home.category.CategoryFragment;
 import com.couponapp.home.category.CategoryPresenter;
-import com.couponapp.home.deals.AllDealsFragment;
+import com.couponapp.home.deals.DealsFragment;
 import com.couponapp.home.deals.DealContract;
 import com.couponapp.home.deals.DealPresenter;
 import com.couponapp.login.LoginActivity;
@@ -37,7 +36,7 @@ import example.couponapp.com.couponapp.R;
 
 
 
-public class DealsHomeActivity extends AppCompatActivity
+public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String USER_INFO = "USER_INFO";
@@ -109,10 +108,10 @@ public class DealsHomeActivity extends AppCompatActivity
 
 
     private void setViewPagerToTabs() {
-        DealsTabsPagerAdapter dealsTabsPagerAdapter =
-                new DealsTabsPagerAdapter(getSupportFragmentManager());
-        setFragmentsInAdapter(dealsTabsPagerAdapter);
-        viewpager.setAdapter(dealsTabsPagerAdapter);
+        HomeTabsPagerAdapter homeTabsPagerAdapter =
+                new HomeTabsPagerAdapter(getSupportFragmentManager());
+        setFragmentsInAdapter(homeTabsPagerAdapter);
+        viewpager.setAdapter(homeTabsPagerAdapter);
         viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -132,12 +131,12 @@ public class DealsHomeActivity extends AppCompatActivity
         });
     }
 
-    private void setFragmentsInAdapter(DealsTabsPagerAdapter dealsTabsPagerAdapter) {
+    private void setFragmentsInAdapter(HomeTabsPagerAdapter homeTabsPagerAdapter) {
 
         Fragment categoryFragment = getCategoryTabFragment();
         Fragment dealsFragment = getAllDealsTabFragment();
-        dealsTabsPagerAdapter.addFragments(dealsFragment);
-        dealsTabsPagerAdapter.addFragments(categoryFragment);
+        homeTabsPagerAdapter.addFragments(dealsFragment);
+        homeTabsPagerAdapter.addFragments(categoryFragment);
 
         new DealPresenter(FirebaseDatabase.getInstance(), (DealContract.View) dealsFragment);
         new CategoryPresenter(FirebaseDatabase.getInstance(),
@@ -189,11 +188,11 @@ public class DealsHomeActivity extends AppCompatActivity
         if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance()
                     .signOut();
-            startActivity(new Intent(DealsHomeActivity.this, LoginActivity.class));
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         }
 
         if (id == R.id.add_deal) {
-            startActivity(new Intent(DealsHomeActivity.this, AddNewDealActivity.class));
+            startActivity(new Intent(HomeActivity.this, AdminActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -202,9 +201,9 @@ public class DealsHomeActivity extends AppCompatActivity
     }
 
 
-    private AllDealsFragment getAllDealsTabFragment() {
-        AllDealsFragment allDealsFragment = AllDealsFragment.newInstance();
-        return allDealsFragment;
+    private DealsFragment getAllDealsTabFragment() {
+        DealsFragment dealsFragment = DealsFragment.newInstance();
+        return dealsFragment;
     }
 
     private CategoryFragment getCategoryTabFragment() {
