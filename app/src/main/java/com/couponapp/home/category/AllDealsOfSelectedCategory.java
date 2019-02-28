@@ -30,7 +30,6 @@ public class AllDealsOfSelectedCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alldeals_selected_category_layout);
         ButterKnife.bind(this);
-        getSupportActionBar().hide();
         String categoryName = getIntent().getStringExtra(EXTRA_CATEGORY_NAME);
         tvTitle.setText(categoryName);
         AllDealsFragment allDealsFragment=getAllDealsFragment(categoryName);

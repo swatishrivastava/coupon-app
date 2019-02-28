@@ -19,7 +19,6 @@ android {
         }
     }
 }
-
 dependencies {
 
     testCompile "org.mockito:mockito-core:1.+"
@@ -46,3 +45,4 @@ dependencies {
     }
     implementation 'com.google.android.gms:play-services:11.4.2'
 }
+

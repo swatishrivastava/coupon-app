@@ -24,7 +24,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="21dp"
         android:ems="10"
-        android:hint="enter company name"
+        android:hint="Enter company name"
         android:layout_marginRight="@dimen/_20dp"
         android:inputType="textPersonName"/>
 
@@ -49,20 +49,22 @@
         android:layout_below="@+id/editText_discount_desc"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:hint="enter location"
+        android:hint="Enter location"
         android:layout_marginRight="@dimen/_20dp"
         android:inputType="textPersonName"
         />
 
-    <EditText
-        android:id="@+id/editText_expiry_date"
+    <Button
+        android:id="@+id/button_expiry_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/editText_location"
         android:layout_below="@+id/editText_location"
         android:layout_marginTop="17dp"
+        android:background="@color/grey"
+        android:textColor="@color/white"
         android:ems="10"
-        android:hint="enter expiry date"
+        android:hint="Choose expiry date"
         android:layout_marginRight="@dimen/_20dp"
         android:inputType="textPersonName"
         />
@@ -71,8 +73,8 @@
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editText_expiry_date"
-        android:layout_below="@+id/editText_expiry_date"
+        android:layout_alignStart="@+id/button_expiry_date"
+        android:layout_below="@+id/button_expiry_date"
         android:layout_marginRight="@dimen/_20dp"
         android:layout_marginTop="20dp"/>
 
@@ -80,12 +82,10 @@
         android:id="@+id/save_deal_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40dp"
-        android:layout_alignStart="@+id/spinner"
-        android:layout_marginTop="21dp"
         android:textColor="@color/white"
-        android:background="@color/green_color"
-        android:layout_marginRight="@dimen/_20dp"
+        android:background="@color/sea_blue"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_20dp"
+        android:layout_margin="@dimen/_10dp"
         android:text="@string/add_deal_btn_label"/>
 </RelativeLayout>

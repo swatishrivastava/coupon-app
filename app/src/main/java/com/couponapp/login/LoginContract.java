@@ -9,7 +9,7 @@ public interface LoginContract {
     interface View extends BaseView<Presenter> {
         void signInSuccessful(UserInfo userInfo);
         void signInFailed();
-        void showToastForCorrectCredentials();
+        void showToastForInCorrectCredentials();
 
     }
 

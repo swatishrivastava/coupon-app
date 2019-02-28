@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">CouponApp</string>
-    <string name="enter_user_name">Enter user name</string>
-    <string name="enter_email">Enter email</string>
+    <string name="app_name">couponapp</string>
+    <string name="enter_user_name">User name</string>
+    <string name="enter_email">Email</string>
 
-    <string name="enter_password">Enter Password</string>
+    <string name="enter_password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_in">Sign In</string>
     <string name="skip">Skip login</string>
     <string name="login_successful_msg">Login successful!</string>
     <string name="login_failed_msg">Login failed!</string>
     <string name="correct_credential_msg">Please enter correct credential.</string>
-    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up">SIGN UP HERE</string>
 
     <string name="sign_up_label">Not an user yet?</string>
     <string name="title_activity_deals_home">DealsHomeActivity</string>
@@ -26,6 +26,14 @@
     <string name="add_deal_btn_label">Add deal</string>
     <string name="progress_text">Getting data</string>
     <string name="deal_saved">Deal saved</string>
+
+
+    <string name="typeface_brush_script_mt_kursiv">brush-script-mt-kursiv</string>
+    <string name="typeface_opensans_regular">OpenSans-Regular</string>
+    <string name="failed_to_get_deals">Failed to get deals</string>
+    <string name="failed_to_get_category">Failed to get category</string>
+    <string name="choose_expiry_date">Choose expiry date</string>
+
 
     <string-array name="category_array">
         <item>Food and drink</item>

@@ -39,6 +39,7 @@ public class CategoryPresenter implements CategoryContract.Presenter {
 
             @Override
             public void onCancelled(DatabaseError error) {
+                view.failedToGetCategory();
             }
         });
 

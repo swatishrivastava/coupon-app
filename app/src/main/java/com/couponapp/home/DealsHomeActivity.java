@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.couponapp.admin.AddNewDealActivity;
 import com.couponapp.home.category.CategoryContract;
@@ -95,7 +96,7 @@ public class DealsHomeActivity extends AppCompatActivity
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setTabTextColors(Color.LTGRAY, Color.WHITE);
         tabLayout.setSelectedTabIndicatorColor(
-                ContextCompat.getColor(this, R.color.light_green_color));
+                ContextCompat.getColor(this, R.color.white));
     }
 
 
@@ -195,7 +196,7 @@ public class DealsHomeActivity extends AppCompatActivity
             startActivity(new Intent(DealsHomeActivity.this, AddNewDealActivity.class));
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

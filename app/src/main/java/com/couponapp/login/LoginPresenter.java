@@ -44,7 +44,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void sighIn(String email,
                        String password) {
         if (isCredentialEmpty(email, password)) {
-            view.showToastForCorrectCredentials();
+            view.showToastForInCorrectCredentials();
         } else {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -52,12 +52,16 @@ public class LoginPresenter implements LoginContract.Presenter {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                                Log.e(LoginPresenter.class.getName(), "sign in successful");
                                 getUserInfo(user.getUid());
 
                             } else {
+                                Log.e(LoginPresenter.class.getName(), "sign in failed");
                                 view.signInFailed();
                             }
                         }
+
+
                     });
         }
 
@@ -68,7 +72,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                        String password,
                        final String name) {
         if (isCredentialEmpty(email, password)) {
-            view.showToastForCorrectCredentials();
+            view.showToastForInCorrectCredentials();
             return;
         } else {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -129,7 +133,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(LoginPresenter.class.getSimpleName(),
                       "error  data for user===  " + databaseError);
-
+                view.signInFailed();
             }
         });
     }

@@ -60,8 +60,11 @@ public class CategoryFragment extends Fragment
     }
 
     private void setRecycleViewLayoutManager() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        setRecyclerViewAttributes(linearLayoutManager);
+        final LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.setAdapter(categoryAdapter);
+      //  setRecyclerViewAttributes(linearLayoutManager);
 
     }
 
@@ -83,6 +86,13 @@ public class CategoryFragment extends Fragment
         Intent intent = new Intent(getContext(), AllDealsOfSelectedCategory.class);
         intent.putExtra(AllDealsOfSelectedCategory.EXTRA_CATEGORY_NAME, categoryName);
         startActivity(intent);
+    }
+
+    @Override
+    public void failedToGetCategory() {
+        progressBar.setVisibility(View.GONE);
+        progressText.setVisibility(View.VISIBLE);
+        progressText.setText(R.string.failed_to_get_category);
     }
 
     @Override

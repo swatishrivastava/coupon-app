@@ -41,7 +41,8 @@ public class DealPresenter implements DealContract.Presenter {
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.w(DealPresenter.class.getSimpleName(), "Failed to read value.",
-                      error.toException());
+                        error.toException());
+                view.failedToGetDeals();
             }
         });
     }
@@ -66,7 +67,7 @@ public class DealPresenter implements DealContract.Presenter {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                view.failedToGetDeals();
             }
         });
 
@@ -77,23 +78,23 @@ public class DealPresenter implements DealContract.Presenter {
     private DealPojo getDealPojoWithData(com.google.firebase.database.DataSnapshot deal) {
         DealPojo dealPojo = new DealPojo();
         dealPojo.setCompanyName(deal.child(DealConstants.DEAL_COMPANY_NAME)
-                                        .getValue()
-                                        .toString());
+                .getValue()
+                .toString());
         dealPojo.setCategory(deal.child(DealConstants.DEAL_CATEGORY)
-                                     .getValue()
-                                     .toString());
+                .getValue()
+                .toString());
         dealPojo.setDescription(deal.child(DealConstants.DEAL_DESCRIPTION)
-                                        .getValue()
-                                        .toString());
+                .getValue()
+                .toString());
         dealPojo.setExpiry_date(deal.child(DealConstants.DEAL_EXPIRY_DATE)
-                                        .getValue()
-                                        .toString());
+                .getValue()
+                .toString());
         dealPojo.setLocation(deal.child(DealConstants.DEAL_LOCATION)
-                                     .getValue()
-                                     .toString());
+                .getValue()
+                .toString());
         dealPojo.setCompanyUrl(deal.child(DealConstants.DEAL_COMPANY_URL)
-                                       .getValue()
-                                       .toString());
+                .getValue()
+                .toString());
 
         return dealPojo;
     }

@@ -1,6 +1,7 @@
 package com.couponapp.login;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,7 +44,10 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
     TextView sighInLabel;
     Unbinder unbinder;
     @BindView(R.id.skip_login)
-    Button skipLogin;
+    TextView skipLogin;
+    @BindView(R.id.app_title)
+    TextView appTitle;
+
     private LoginContract.Presenter presenterObj;
 
     public static SignInFragment newInstance() {
@@ -58,6 +62,8 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
         View root = inflater.inflate(R.layout.login_layout, container, false);
         unbinder = ButterKnife.bind(this, root);
         initializeView();
+        Typeface typeface = getResources().getFont(R.font.brush_script);
+        appTitle.setTypeface(typeface);
         return root;
     }
 
@@ -74,7 +80,9 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
         editTextConfirmPassword.setText("");
         editTextEmail.setText("");
         editTextPassword.setText("");
+        signInBtn.setVisibility(View.VISIBLE);
         sighIn.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -116,7 +124,7 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
     }
 
     @Override
-    public void showToastForCorrectCredentials() {
+    public void showToastForInCorrectCredentials() {
         clearAllViews();
         progressBar.setVisibility(View.GONE);
         Toast.makeText(getActivity(), getString(R.string.correct_credential_msg), Toast.LENGTH_SHORT)
@@ -138,6 +146,7 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
                                             .toString(), editTextPassword.getText()
                                             .toString());
                 signInBtn.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 break;
             }
             case R.id.sign_up_btn: {
@@ -152,6 +161,7 @@ public class SignInFragment extends Fragment implements LoginContract.View, View
             }
             case R.id.skip_login: {
                 startDealActivity(new UserInfo());
+                break;
             }
 
             case R.id.sigh_in_label: {

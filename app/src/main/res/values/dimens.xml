@@ -24,6 +24,7 @@
     <dimen name="right_margin_for_service_issue_label">30dp</dimen>
     <dimen name="end_margin_for_service_issue_label">30dp</dimen>
     <dimen name="_2dp">2dp</dimen>
+    <dimen name="_1dp">1dp</dimen>
 
     <!-- Navigation Drawer -->
     <dimen name="navigation_drawer_max_width">320dp</dimen>
@@ -56,6 +57,7 @@
     <dimen name="_300dp">300dp</dimen>
     <dimen name="_250dp">250dp</dimen>
     <dimen name="_30dp">30dp</dimen>
+    <dimen name="_35dp">35dp</dimen>
     <dimen name="_150dp">150dp</dimen>
     <dimen name="_50dp">50dp</dimen>
     <dimen name="_18dp">18dp</dimen>

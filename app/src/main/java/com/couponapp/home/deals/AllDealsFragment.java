@@ -94,6 +94,13 @@ public class AllDealsFragment extends Fragment implements DealContract.View {
     }
 
     @Override
+    public void failedToGetDeals() {
+        progressBar.setVisibility(View.GONE);
+        progressText.setVisibility(View.VISIBLE);
+        progressText.setText(R.string.failed_to_get_deals);
+    }
+
+    @Override
     public void setPresenter(DealContract.Presenter presenter) {
         this.dealPresenter= (DealPresenter) presenter;
     }

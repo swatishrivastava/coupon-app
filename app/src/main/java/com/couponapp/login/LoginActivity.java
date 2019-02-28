@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import com.couponapp.home.DealsHomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login_activity_layout);
         FirebaseMessaging.getInstance().subscribeToTopic(PUSH_NOTIFICATION);
         SignInFragment signInFragment = SignInFragment.newInstance();

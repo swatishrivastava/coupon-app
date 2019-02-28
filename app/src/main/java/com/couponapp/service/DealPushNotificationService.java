@@ -21,14 +21,12 @@ public class DealPushNotificationService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
+        Log.e("test", "Notification service called");
         if (remoteMessage.getNotification() != null) {
             sendNotification(remoteMessage.getNotification()
                                      .getTitle(),remoteMessage.getNotification()
                                      .getBody());
         }
-
-
-
     }
 
     private void sendNotification(String notificationTitle, String notificationBody) {

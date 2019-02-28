@@ -58,7 +58,7 @@ public class LoginPresenterTest {
     public void testForEmptyCredential() {
         loginPresenter.sighIn("", "");
         Mockito.verify(loginView)
-                .showToastForCorrectCredentials();
+                .showToastForInCorrectCredentials();
     }
 
 

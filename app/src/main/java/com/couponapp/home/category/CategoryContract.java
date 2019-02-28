@@ -10,6 +10,7 @@ public interface CategoryContract {
     interface View extends BaseView<CategoryContract.Presenter> {
          void showAllCategory(List<String> categoryList);
          void showSelectedCategoryDealsUI(String categoryName);
+         void failedToGetCategory();
 
     }
 
