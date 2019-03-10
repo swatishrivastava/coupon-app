@@ -11,45 +11,31 @@ import java.util.List;
 
 public class CategoryPresenter implements CategoryContract.Presenter {
 
-    private FirebaseDatabase firebaseDatabase;
+    private CategoryClientInterface categoryClientInterface;
     private CategoryContract.View view;
-    public  final static String CATEGORIES="Categories";
 
-    public CategoryPresenter(FirebaseDatabase firebaseDatabase,
+    public CategoryPresenter(CategoryClientInterface categoryClient,
                              CategoryContract.View viewObj) {
-        this.firebaseDatabase = firebaseDatabase;
+        this.categoryClientInterface = categoryClient;
         this.view = viewObj;
         this.view.setPresenter(this);
     }
 
-
     @Override
     public void fetchAllCategories() {
-        final List<String> categoryPojoList = new ArrayList<>();
-        DatabaseReference myRef = firebaseDatabase.getReference(CATEGORIES);
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot category : dataSnapshot.getChildren()) {
-                    categoryPojoList.add(category.getValue()
-                                                 .toString());
-                }
-                view.showAllCategory(categoryPojoList);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                view.failedToGetCategory();
-            }
-        });
+        List<String> strings = categoryClientInterface.fetchAllCategories();
+        if (strings.isEmpty()) {
+            view.failedToGetCategory();
+        } else {
+            view.showAllCategory(strings);
+        }
 
     }
 
     @Override
     public void openSelectedCategoryDeals(String categoryName) {
-         view.showSelectedCategoryDealsUI(categoryName);
+        view.showSelectedCategoryDealsUI(categoryName);
     }
-
 
 
     @Override

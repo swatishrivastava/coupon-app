@@ -1,9 +1,5 @@
 package com.couponapp.utils;
 
-/**
- * Created by swatishrivastava on 2/21/2018.
- */
-
 public class DealConstants {
 
         public final static String DEALS = "Deals";

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
+
 public class DealPojo implements Parcelable, Serializable {
     public String companyName;
     public String description;

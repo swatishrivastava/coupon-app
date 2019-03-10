@@ -1,34 +1,35 @@
 package com.couponapp.tests.deals;
 
 
-import com.couponapp.utils.DealConstants;
-import com.couponapp.home.deals.DealContract;
-import com.couponapp.home.deals.DealPresenter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+        import com.couponapp.home.deals.DealClientInterface;
+        import com.couponapp.home.deals.DealContract;
+        import com.couponapp.home.deals.DealPojo;
+        import com.couponapp.home.deals.DealPresenter;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+        import org.junit.Assert;
+        import org.junit.Before;
+        import org.junit.Test;
+        import org.mockito.Mock;
+        import org.mockito.Mockito;
+        import org.mockito.MockitoAnnotations;
+
+        import java.util.ArrayList;
+        import java.util.List;
 
 public class DealPresenterTest {
+    @Mock
+    private DealContract.View mockView;
 
     @Mock
-    FirebaseDatabase mockFirebaseDatabase;
+    private DealClientInterface dealClientInterface;
 
-    @Mock
-    DealContract.View mockView;
-
-    DealPresenter dealPresenter;
+    private DealPresenter dealPresenter;
 
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        dealPresenter = new DealPresenter(mockFirebaseDatabase, mockView);
+        dealPresenter = new DealPresenter(mockView, dealClientInterface);
     }
 
     @Test
@@ -38,17 +39,66 @@ public class DealPresenterTest {
 
     @Test
     public void createPresenter_setsThePresenterToView() {
-        DealPresenter dealPresenter = new DealPresenter(mockFirebaseDatabase, mockView);
         Mockito.verify(mockView)
                 .setPresenter(dealPresenter);
     }
 
     @Test
-    public void testFetchAllDeals() {
-        DatabaseReference databaseReference = Mockito.mock(DatabaseReference.class);
-        Mockito.when(mockFirebaseDatabase.getReference(DealConstants.DEALS))
-                .thenReturn(databaseReference);
+    public void verifyViewShowAllDealCalledWhenGetListOfDeals() {
+        List<DealPojo> list = new ArrayList<>();
+        DealPojo dealPojo = new DealPojo();
+        dealPojo.setCategory("TestCategory");
+        dealPojo.setCompanyName("TestCompany");
+        dealPojo.setDescription("TestDes");
+        dealPojo.setExpiry_date("TestExpiry");
+        dealPojo.setLocation("TestLocation");
+        list.add(dealPojo);
+        Mockito.when(dealClientInterface.getAllDeals()).thenReturn(list);
         dealPresenter.fetchAllDeals();
-        Assert.assertNotNull(databaseReference);
+        Mockito.verify(dealClientInterface, Mockito.times(1)).getAllDeals();
+        Mockito.verify(mockView, Mockito.times(1)).showAllDeals(Mockito.anyList());
+
     }
+
+    @Test
+    public void failedToShowDealsWhenDealListEmpty() {
+        List<DealPojo> list = new ArrayList<>();
+        Mockito.when(dealClientInterface.getAllDeals()).thenReturn(list);
+        dealPresenter.fetchAllDeals();
+        Mockito.verify(dealClientInterface, Mockito.times(1)).getAllDeals();
+        Mockito.verify(mockView, Mockito.times(1)).failedToGetDeals();
+
+    }
+
+    @Test
+    public void verifyViewShowAllDealCalledWhenGetListOfDealsByCategory() {
+        List<DealPojo> list = new ArrayList<>();
+        DealPojo dealPojo = new DealPojo();
+        dealPojo.setCategory("TestCategory");
+        dealPojo.setCompanyName("TestCompany");
+        dealPojo.setDescription("TestDes");
+        dealPojo.setExpiry_date("TestExpiry");
+        dealPojo.setLocation("TestLocation");
+        list.add(dealPojo);
+        Mockito.when(dealClientInterface.getAllDealsByCategory("TestCategory"))
+                .thenReturn(list);
+        dealPresenter.fetchAllDealsByCategory("TestCategory");
+        Mockito.verify(dealClientInterface, Mockito.times(1))
+                .getAllDealsByCategory("TestCategory");
+        Mockito.verify(mockView, Mockito.times(1)).showAllDeals(Mockito.anyList());
+
+    }
+
+    @Test
+    public void failedToShowDealsWhenDealListEmptyByCategory() {
+        List<DealPojo> list = new ArrayList<>();
+        Mockito.when(dealClientInterface.getAllDealsByCategory("TestCategory"))
+                .thenReturn(list);
+        dealPresenter.fetchAllDealsByCategory("TestCategory");
+        Mockito.verify(dealClientInterface, Mockito.times(1))
+                .getAllDealsByCategory("TestCategory");
+        Mockito.verify(mockView, Mockito.times(1)).failedToGetDeals();
+
+    }
+
 }

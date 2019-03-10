@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.couponapp.home.deals.DealsClient;
 import com.couponapp.home.deals.DealsFragment;
 import com.couponapp.home.deals.DealPresenter;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,12 +31,12 @@ public class CategoryForSelectedDeal extends AppCompatActivity {
         ButterKnife.bind(this);
         String categoryName = getIntent().getStringExtra(EXTRA_CATEGORY_NAME);
         tvTitle.setText(categoryName);
-        DealsFragment dealsFragment =getAllDealsFragment(categoryName);
+        DealsFragment dealsFragment = getAllDealsFragment(categoryName);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_activity_content_frame, dealsFragment)
                 .addToBackStack(DealsFragment.TAG)
                 .commit();
-        new DealPresenter(FirebaseDatabase.getInstance(), dealsFragment);
+        new DealPresenter(dealsFragment, new DealsClient(FirebaseDatabase.getInstance()));
     }
 
     private DealsFragment getAllDealsFragment(String categoryName) {

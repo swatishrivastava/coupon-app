@@ -1,5 +1,6 @@
 package com.couponapp.tests.category;
 
+import com.couponapp.home.category.CategoryClientInterface;
 import com.couponapp.home.category.CategoryContract;
 import com.couponapp.home.category.CategoryPresenter;
 import com.google.firebase.database.DatabaseReference;
@@ -12,53 +13,63 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
 public class CategoryPresenterTest {
-
-
     @Mock
-    FirebaseDatabase mockFirebaseDatabase;
-
+    private CategoryClientInterface categoryClientInterface;
     @Mock
-    CategoryContract.View mockView;
+    private CategoryContract.View mockView;
 
-    CategoryPresenter categoryPresenter;
+    private CategoryPresenter categoryPresenter;
 
     @Before
-    public void setup(){
+    public void setup() {
         MockitoAnnotations.initMocks(this);
-        categoryPresenter=new CategoryPresenter(mockFirebaseDatabase, mockView);
+        categoryPresenter = new CategoryPresenter(categoryClientInterface, mockView);
     }
 
     @Test
-    public void testPrequiste(){
+    public void testPrequiste() {
         Assert.assertNotNull(categoryPresenter);
     }
 
     @Test
     public void createPresenter_setsThePresenterToView() {
         categoryPresenter =
-                new CategoryPresenter(mockFirebaseDatabase, mockView);
+                new CategoryPresenter(categoryClientInterface, mockView);
         verify(mockView).setPresenter(categoryPresenter);
     }
 
 
     @Test
-    public void testOpenSelectedCategoryDeals(){
+    public void testOpenSelectedCategoryDeals() {
         categoryPresenter.openSelectedCategoryDeals("testCategory");
         Mockito.verify(mockView).showSelectedCategoryDealsUI("testCategory");
     }
 
     @Test
-    public void testFetchAllCategories(){
-        DatabaseReference databaseReference=Mockito.mock(DatabaseReference.class);
-        Mockito.when(mockFirebaseDatabase.getReference(CategoryPresenter.CATEGORIES)).thenReturn(databaseReference);
+    public void testShowAllCategoriesOnUI(){
+        List<String> listOfCategoris=new ArrayList<>();
+        listOfCategoris.add("Food");
+        listOfCategoris.add("Music");
+        Mockito.when(categoryClientInterface.fetchAllCategories()).thenReturn(listOfCategoris);
         categoryPresenter.fetchAllCategories();
-        Assert.assertNotNull(databaseReference);
-
+        Mockito.verify(mockView, times(1)).showAllCategory(anyList());
 
     }
 
+    @Test
+    public void doNotShowCategoriesWhenReceivedEmptyListFromBackend(){
+        Mockito.when(categoryClientInterface.fetchAllCategories()).thenReturn(new ArrayList<String>());
+        categoryPresenter.fetchAllCategories();
+        Mockito.verify(mockView).failedToGetCategory();
+
+    }
 }

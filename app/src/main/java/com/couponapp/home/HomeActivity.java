@@ -18,12 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.couponapp.admin.AdminActivity;
+import com.couponapp.home.category.CategoryClient;
 import com.couponapp.home.category.CategoryContract;
 import com.couponapp.home.category.CategoryFragment;
 import com.couponapp.home.category.CategoryPresenter;
-import com.couponapp.home.deals.DealsFragment;
 import com.couponapp.home.deals.DealContract;
 import com.couponapp.home.deals.DealPresenter;
+import com.couponapp.home.deals.DealsClient;
+import com.couponapp.home.deals.DealsFragment;
 import com.couponapp.login.LoginActivity;
 import com.couponapp.login.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,8 +34,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import example.couponapp.com.couponapp.R;
-
-
 
 
 public class HomeActivity extends AppCompatActivity
@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle =
                 new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,
-                                          R.string.navigation_drawer_close);
+                        R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -101,9 +101,9 @@ public class HomeActivity extends AppCompatActivity
 
     private void addTabsToTabLayout() {
         tabLayout.addTab(tabLayout.newTab()
-                                 .setText(getString(R.string.best_offer_tab_label)));
+                .setText(getString(R.string.best_offer_tab_label)));
         tabLayout.addTab(tabLayout.newTab()
-                                 .setText(getString(R.string.category_tab_label)));
+                .setText(getString(R.string.category_tab_label)));
     }
 
 
@@ -138,9 +138,10 @@ public class HomeActivity extends AppCompatActivity
         homeTabsPagerAdapter.addFragments(dealsFragment);
         homeTabsPagerAdapter.addFragments(categoryFragment);
 
-        new DealPresenter(FirebaseDatabase.getInstance(), (DealContract.View) dealsFragment);
-        new CategoryPresenter(FirebaseDatabase.getInstance(),
-                              (CategoryContract.View) categoryFragment);
+        new DealPresenter((DealContract.View) dealsFragment,
+                new DealsClient(FirebaseDatabase.getInstance()));
+        new CategoryPresenter(new CategoryClient(FirebaseDatabase.getInstance()),
+                (CategoryContract.View) categoryFragment);
     }
 
 
