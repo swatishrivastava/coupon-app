@@ -1,34 +1,26 @@
 package com.couponapp.home.category;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.couponapp.home.UseCase;
+import com.couponapp.home.deals.ICallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryPresenter implements CategoryContract.Presenter {
+public class CategoryPresenter implements CategoryContract.Presenter, ICallback {
 
-    private CategoryClientInterface categoryClientInterface;
+    private UseCase categoryUsecase;
     private CategoryContract.View view;
 
-    public CategoryPresenter(CategoryClientInterface categoryClient,
+    public CategoryPresenter(UseCase categoryUsecase,
                              CategoryContract.View viewObj) {
-        this.categoryClientInterface = categoryClient;
+        this.categoryUsecase = categoryUsecase;
         this.view = viewObj;
         this.view.setPresenter(this);
     }
 
     @Override
     public void fetchAllCategories() {
-        List<String> strings = categoryClientInterface.fetchAllCategories();
-        if (strings.isEmpty()) {
-            view.failedToGetCategory();
-        } else {
-            view.showAllCategory(strings);
-        }
+        categoryUsecase.execute(this);
 
     }
 
@@ -41,5 +33,20 @@ public class CategoryPresenter implements CategoryContract.Presenter {
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public void onSuccess(Object o) {
+        List<Category> categories = (ArrayList) o;
+        if (categories.isEmpty()) {
+            view.failedToGetCategory();
+        } else {
+            view.showAllCategory(categories);
+        }
+    }
+
+    @Override
+    public void onFail(Throwable throwable) {
+        view.failedToGetCategory();
     }
 }

@@ -3,6 +3,7 @@ package com.couponapp.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,18 +23,21 @@ import com.couponapp.home.category.CategoryClient;
 import com.couponapp.home.category.CategoryContract;
 import com.couponapp.home.category.CategoryFragment;
 import com.couponapp.home.category.CategoryPresenter;
+import com.couponapp.home.category.GetCategoriesUseCase;
+import com.couponapp.home.deals.DealClient;
 import com.couponapp.home.deals.DealContract;
 import com.couponapp.home.deals.DealPresenter;
-import com.couponapp.home.deals.DealsClient;
 import com.couponapp.home.deals.DealsFragment;
+import com.couponapp.home.deals.GetDealsUseCase;
 import com.couponapp.login.LoginActivity;
 import com.couponapp.login.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import example.couponapp.com.couponapp.R;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeActivity extends AppCompatActivity
@@ -138,10 +142,19 @@ public class HomeActivity extends AppCompatActivity
         homeTabsPagerAdapter.addFragments(dealsFragment);
         homeTabsPagerAdapter.addFragments(categoryFragment);
 
+        Retrofit retrofit = getRetrofit();
         new DealPresenter((DealContract.View) dealsFragment,
-                new DealsClient(FirebaseDatabase.getInstance()));
-        new CategoryPresenter(new CategoryClient(FirebaseDatabase.getInstance()),
+                new GetDealsUseCase(new DealClient(retrofit)));
+        new CategoryPresenter(new GetCategoriesUseCase(new CategoryClient(retrofit)),
                 (CategoryContract.View) categoryFragment);
+    }
+
+    @NonNull
+    private Retrofit getRetrofit() {
+        return new Retrofit.Builder()
+                    .baseUrl("http://192.168.43.15:8085/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
     }
 
 

@@ -31,7 +31,7 @@ public class CategoryFragment extends Fragment
     @BindView(R.id.progress_text)
     TextView progressText;
     Unbinder unbinder;
-    private List<String> categoryPojoList = new ArrayList<>();
+    private List<Category> categoryPojoList = new ArrayList<>();
     private CategoryAdapter categoryAdapter;
     CategoryPresenter categoryPresenter;
 
@@ -70,8 +70,9 @@ public class CategoryFragment extends Fragment
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
+
     @Override
-    public void showAllCategory(List<String> categoryList) {
+    public void showAllCategory(List<Category> categoryList) {
         progressBar.setVisibility(View.GONE);
         progressText.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);

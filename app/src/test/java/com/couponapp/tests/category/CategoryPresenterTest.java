@@ -1,10 +1,7 @@
 package com.couponapp.tests.category;
 
-import com.couponapp.home.category.CategoryClientInterface;
 import com.couponapp.home.category.CategoryContract;
 import com.couponapp.home.category.CategoryPresenter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.junit.Assert;
 import org.junit.Before;

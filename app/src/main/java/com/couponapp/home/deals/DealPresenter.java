@@ -1,45 +1,48 @@
 package com.couponapp.home.deals;
 
-import com.couponapp.utils.DealConstants;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.couponapp.home.UseCase;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class DealPresenter implements DealContract.Presenter {
+public class DealPresenter implements DealContract.Presenter, ICallback {
     private DealContract.View view;
-    private DealClientInterface dealClientInterface;
+    private UseCase dealsUseCase;
 
-    public DealPresenter(DealContract.View viewObj, DealClientInterface dealsClient) {
+    public DealPresenter(DealContract.View viewObj, UseCase dealUsecase) {
         this.view = viewObj;
-        this.dealClientInterface = dealsClient;
+        this.dealsUseCase = dealUsecase;
         this.view.setPresenter(this);
     }
 
     @Override
     public void fetchAllDeals() {
-        List<DealPojo> allDeals = dealClientInterface.getAllDeals();
-        if (allDeals.isEmpty()) {
-            view.failedToGetDeals();
-        } else view.showAllDeals(allDeals);
+        dealsUseCase.execute(this);
     }
-
 
     @Override
     public void fetchAllDealsByCategory(String categoryName) {
-        List<DealPojo> allDealsByCategory = dealClientInterface.getAllDealsByCategory(categoryName);
+       /* List<DealDto> allDealsByCategory = dealClientInterface.getAllDealsByCategory(categoryName);
         if (allDealsByCategory.isEmpty()) {
             view.failedToGetDeals();
-        } else view.showAllDeals(allDealsByCategory);
+        } else view.showAllDeals(getListOfDealsFromDealDto(allDealsByCategory));*/
     }
 
 
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public void onSuccess(Object o) {
+        ArrayList allDeals = (ArrayList) o;
+        if (allDeals.isEmpty()) {
+            view.failedToGetDeals();
+        } else view.showAllDeals(allDeals);
+    }
+
+    @Override
+    public void onFail(Throwable throwable) {
+        view.failedToGetDeals();
     }
 }

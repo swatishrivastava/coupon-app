@@ -1,9 +1,8 @@
 package com.couponapp.tests.deals;
 
 
-        import com.couponapp.home.deals.DealClientInterface;
         import com.couponapp.home.deals.DealContract;
-        import com.couponapp.home.deals.DealPojo;
+        import com.couponapp.home.deals.DealDto;
         import com.couponapp.home.deals.DealPresenter;
 
         import org.junit.Assert;
@@ -45,14 +44,14 @@ public class DealPresenterTest {
 
     @Test
     public void verifyViewShowAllDealCalledWhenGetListOfDeals() {
-        List<DealPojo> list = new ArrayList<>();
-        DealPojo dealPojo = new DealPojo();
-        dealPojo.setCategory("TestCategory");
-        dealPojo.setCompanyName("TestCompany");
-        dealPojo.setDescription("TestDes");
-        dealPojo.setExpiry_date("TestExpiry");
-        dealPojo.setLocation("TestLocation");
-        list.add(dealPojo);
+        List<DealDto> list = new ArrayList<>();
+        DealDto dealDto = new DealDto();
+        dealDto.setCategory("TestCategory");
+        dealDto.setCompanyName("TestCompany");
+        dealDto.setDescription("TestDes");
+        dealDto.setExpiry_date("TestExpiry");
+        dealDto.setLocation("TestLocation");
+        list.add(dealDto);
         Mockito.when(dealClientInterface.getAllDeals()).thenReturn(list);
         dealPresenter.fetchAllDeals();
         Mockito.verify(dealClientInterface, Mockito.times(1)).getAllDeals();
@@ -62,7 +61,7 @@ public class DealPresenterTest {
 
     @Test
     public void failedToShowDealsWhenDealListEmpty() {
-        List<DealPojo> list = new ArrayList<>();
+        List<DealDto> list = new ArrayList<>();
         Mockito.when(dealClientInterface.getAllDeals()).thenReturn(list);
         dealPresenter.fetchAllDeals();
         Mockito.verify(dealClientInterface, Mockito.times(1)).getAllDeals();
@@ -72,14 +71,14 @@ public class DealPresenterTest {
 
     @Test
     public void verifyViewShowAllDealCalledWhenGetListOfDealsByCategory() {
-        List<DealPojo> list = new ArrayList<>();
-        DealPojo dealPojo = new DealPojo();
-        dealPojo.setCategory("TestCategory");
-        dealPojo.setCompanyName("TestCompany");
-        dealPojo.setDescription("TestDes");
-        dealPojo.setExpiry_date("TestExpiry");
-        dealPojo.setLocation("TestLocation");
-        list.add(dealPojo);
+        List<DealDto> list = new ArrayList<>();
+        DealDto dealDto = new DealDto();
+        dealDto.setCategory("TestCategory");
+        dealDto.setCompanyName("TestCompany");
+        dealDto.setDescription("TestDes");
+        dealDto.setExpiry_date("TestExpiry");
+        dealDto.setLocation("TestLocation");
+        list.add(dealDto);
         Mockito.when(dealClientInterface.getAllDealsByCategory("TestCategory"))
                 .thenReturn(list);
         dealPresenter.fetchAllDealsByCategory("TestCategory");
@@ -91,7 +90,7 @@ public class DealPresenterTest {
 
     @Test
     public void failedToShowDealsWhenDealListEmptyByCategory() {
-        List<DealPojo> list = new ArrayList<>();
+        List<DealDto> list = new ArrayList<>();
         Mockito.when(dealClientInterface.getAllDealsByCategory("TestCategory"))
                 .thenReturn(list);
         dealPresenter.fetchAllDealsByCategory("TestCategory");

@@ -18,12 +18,12 @@ import example.couponapp.com.couponapp.R;
 public class DealFragmentAdapter
         extends RecyclerView.Adapter<DealFragmentAdapter.DealViewHolder> {
 
-    private ArrayList<DealPojo> dealPojoList;
+    private ArrayList<Deal> deals;
     private View mView;
 
-    public DealFragmentAdapter(List<DealPojo> dealPojoListObj) {
+    public DealFragmentAdapter(List<Deal> dealDtoListObj) {
         super();
-        this.dealPojoList = (ArrayList<DealPojo>) dealPojoListObj;
+        this.deals = (ArrayList<Deal>) dealDtoListObj;
     }
 
     @Override
@@ -38,11 +38,11 @@ public class DealFragmentAdapter
     @Override
     public void onBindViewHolder(DealViewHolder holder,
                                  int position) {
-        holder.textView_company_name.setText(dealPojoList.get(position)
+        holder.textView_company_name.setText(deals.get(position)
                                                      .getCompanyName().toString());
-        holder.textView_discount.setText(dealPojoList.get(position)
+        holder.textView_discount.setText(deals.get(position)
                                                  .getDescription().toString());
-        holder.textView_category.setText(dealPojoList.get(position).getCategory().toString());
+        holder.textView_category.setText(deals.get(position).getCategory().toString());
         loadImageForLocation(position, holder.deal_company_logo);
 
     }
@@ -50,7 +50,7 @@ public class DealFragmentAdapter
     private void loadImageForLocation(int position,
                                       ImageView imageView) {
         Glide.with(CouponApplication.getAppContext())
-                .load(dealPojoList.get(position)
+                .load(deals.get(position)
                               .getCompanyUrl())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
@@ -59,7 +59,7 @@ public class DealFragmentAdapter
 
     @Override
     public int getItemCount() {
-        return dealPojoList.size();
+        return deals.size();
     }
 
     static class DealViewHolder extends RecyclerView.ViewHolder {
@@ -78,9 +78,9 @@ public class DealFragmentAdapter
         }
     }
 
-    public void updateList(List<DealPojo> dealsList) {
-        dealPojoList.clear();
-        dealPojoList.addAll(dealsList);
+    public void updateList(List<Deal> dealsList) {
+        deals.clear();
+        deals.addAll(dealsList);
         notifyDataSetChanged();
     }
 

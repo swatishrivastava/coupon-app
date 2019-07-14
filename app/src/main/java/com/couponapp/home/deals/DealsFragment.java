@@ -79,16 +79,16 @@ public class DealsFragment extends Fragment implements DealContract.View {
         final LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLinearLayoutManager);
-        allSiteFragmentCardViewAdapter = new DealFragmentAdapter(new ArrayList<DealPojo>());
+        allSiteFragmentCardViewAdapter = new DealFragmentAdapter(new ArrayList<Deal>());
         recyclerView.setAdapter(allSiteFragmentCardViewAdapter);
     }
 
     @Override
-    public void showAllDeals(List<DealPojo> dealPojoList) {
+    public void showAllDeals(List<Deal> dealDtoList) {
         progressBar.setVisibility(View.GONE);
         progressText.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-        allSiteFragmentCardViewAdapter.updateList(dealPojoList);
+        allSiteFragmentCardViewAdapter.updateList(dealDtoList);
     }
 
     @Override

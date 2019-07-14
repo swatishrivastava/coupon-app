@@ -15,7 +15,7 @@ import example.couponapp.com.couponapp.R;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
         implements View.OnClickListener {
 
-    private List<String> dataSource;
+    private List<Category> dataSource;
     CategoryContract.OnCategoryClickListener categoryClickListener;
 
     @Override
@@ -24,7 +24,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                                                       .toString());
     }
 
-    public CategoryAdapter(List<String> dataArgs,
+    public CategoryAdapter(List<Category> dataArgs,
                            CategoryContract.OnCategoryClickListener categoryClickListenerObj) {
         dataSource = dataArgs;
         this.categoryClickListener = categoryClickListenerObj;
@@ -41,7 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(CategoryViewHolder holder,
                                  int position) {
-        holder.textView.setText(dataSource.get(position));
+        holder.textView.setText(dataSource.get(position).getName());
         holder.textView.setTag(dataSource.get(position));
         holder.textView.setOnClickListener(this);
     }
@@ -60,7 +60,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
     }
 
-    public void updateList(List<String> categoryList) {
+    public void updateList(List<Category> categoryList) {
         dataSource.clear();
         dataSource.addAll(categoryList);
         notifyDataSetChanged();

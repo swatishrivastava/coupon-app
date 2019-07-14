@@ -2,7 +2,7 @@ package com.couponapp.admin;
 
 import com.couponapp.application.BasePresenter;
 import com.couponapp.application.BaseView;
-import com.couponapp.home.deals.DealPojo;
+import com.couponapp.home.deals.DealDto;
 
 
 public interface AdminContract {
@@ -12,7 +12,7 @@ public interface AdminContract {
     }
 
     interface AdminPresenter extends BasePresenter{
-        void saveDeal(DealPojo dealPojo);
+        void saveDeal(DealDto dealDto);
 
     }
 }

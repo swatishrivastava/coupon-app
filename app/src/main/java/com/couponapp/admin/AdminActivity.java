@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.couponapp.home.deals.DealPojo;
+import com.couponapp.home.deals.DealDto;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
@@ -72,19 +72,19 @@ public class AdminActivity extends AppCompatActivity implements AdminContract.Vi
 
     @OnClick(R.id.save_deal_btn)
     public void saveDeals() {
-        DealPojo dealPojo = new DealPojo();
-        dealPojo.setExpiry_date(button_expiry_date.getText()
+        DealDto dealDto = new DealDto();
+        dealDto.setExpiry_date(button_expiry_date.getText()
                 .toString());
-        dealPojo.setDescription(editTextDiscountDesc.getText()
+        dealDto.setDescription(editTextDiscountDesc.getText()
                 .toString());
-        dealPojo.setCompanyName(editTextCompanyName.getText()
+        dealDto.setCompanyName(editTextCompanyName.getText()
                 .toString());
-        dealPojo.setCategory(spinner.getSelectedItem()
+        dealDto.setCategory(spinner.getSelectedItem()
                 .toString());
-        dealPojo.setCompanyUrl("https://i-cdn.phonearena.com/images/article/51374-image/Deal-tracker-450-LG-G2-440-iPad-mini-4G-free-Disney-games-more-deals-on-phones-tablets-and-apps.jpg");
-        dealPojo.setLocation(editTextLocation.getText()
+        dealDto.setCompanyUrl("https://i-cdn.phonearena.com/images/article/51374-image/Deal-tracker-450-LG-G2-440-iPad-mini-4G-free-Disney-games-more-deals-on-phones-tablets-and-apps.jpg");
+        dealDto.setLocation(editTextLocation.getText()
                 .toString());
-        presenter.saveDeal(dealPojo);
+        presenter.saveDeal(dealDto);
 
     }
 

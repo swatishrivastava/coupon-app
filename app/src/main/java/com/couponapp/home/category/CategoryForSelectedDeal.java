@@ -6,10 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.couponapp.home.deals.DealsClient;
 import com.couponapp.home.deals.DealsFragment;
-import com.couponapp.home.deals.DealPresenter;
-import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +33,7 @@ public class CategoryForSelectedDeal extends AppCompatActivity {
                 .replace(R.id.main_activity_content_frame, dealsFragment)
                 .addToBackStack(DealsFragment.TAG)
                 .commit();
-        new DealPresenter(dealsFragment, new DealsClient(FirebaseDatabase.getInstance()));
+       // new DealPresenter(dealsFragment, new DealsClient(FirebaseDatabase.getInstance()));
     }
 
     private DealsFragment getAllDealsFragment(String categoryName) {

@@ -2,41 +2,43 @@ package com.couponapp.home.category;
 
 import android.util.Log;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.couponapp.home.UseCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryClient implements CategoryClientInterface {
-    public final static String CATEGORIES = "Categories";
-    private FirebaseDatabase firebaseDatabase;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
+public class CategoryClient implements CategoryRespository {
 
-    public CategoryClient(FirebaseDatabase firebaseDatabase) {
-        this.firebaseDatabase = firebaseDatabase;
+    public static final String LOGGER = CategoryClient.class.getName();
+    private CategoryInterface service;
+
+    public CategoryClient(Retrofit retrofit) {
+        this.service = retrofit.create(CategoryInterface.class);
     }
 
     @Override
-    public List<String> fetchAllCategories() {
-        final List<String> categoryPojoList = new ArrayList<>();
-        DatabaseReference myRef = firebaseDatabase.getReference(CATEGORIES);
-        myRef.addValueEventListener(new ValueEventListener() {
+    public void fetchAllCategories(UseCase.Callback callback) {
+        final List<CategoryDto> categoryDtoArrayList = new ArrayList<>();
+        final Call<List<CategoryDto>> allDeals = service.getAllCategories();
+        allDeals.enqueue(new Callback<List<CategoryDto>>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot category : dataSnapshot.getChildren()) {
-                    categoryPojoList.add(category.getValue()
-                            .toString());
-                }
+            public void onResponse(Call<List<CategoryDto>> call, Response<List<CategoryDto>> response) {
+                categoryDtoArrayList.addAll(response.body());
+                callback.onSuccess(categoryDtoArrayList);
+                Log.e(LOGGER, "Response from service" + response.body().toString());
             }
+
             @Override
-            public void onCancelled(DatabaseError error) {
-                Log.e(CategoryClient.class.getName(), "Failed to get all categories");
+            public void onFailure(Call<List<CategoryDto>> call, Throwable t) {
+                Log.e(LOGGER, t.getMessage());
+                callback.onError(t);
             }
         });
-        return categoryPojoList;
+
     }
 }
