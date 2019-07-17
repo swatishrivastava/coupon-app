@@ -9,13 +9,12 @@ import java.util.List;
 public interface DealContract {
 
     interface View extends BaseView<DealContract.Presenter> {
-        void showAllDeals(List<Deal> dealDtoList);
+        void showAllDeals(List<NewDealInterface> dealDtoList);
         void failedToGetDeals();
     }
 
     interface Presenter extends BasePresenter {
 
         void fetchAllDeals();
-        void fetchAllDealsByCategory(String categoryName);
     }
 }

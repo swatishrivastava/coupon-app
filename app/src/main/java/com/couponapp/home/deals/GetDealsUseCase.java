@@ -10,14 +10,14 @@ import static java.util.stream.Collectors.toList;
 public class GetDealsUseCase implements UseCase, UseCase.Callback {
 
     private DealRepository dealRepository;
-    private ICallback callback;
+    private UseCaseCallback callback;
 
     public GetDealsUseCase(DealRepository dealRepository) {
         this.dealRepository = dealRepository;
     }
 
     @Override
-    public void execute(ICallback callback) {
+    public void execute(UseCaseCallback callback) {
         dealRepository.fetchAllDeals(this );
         this.callback=callback;
 
@@ -35,7 +35,7 @@ public class GetDealsUseCase implements UseCase, UseCase.Callback {
     }
 
     private List<Deal> getListOfDealEntityFromDealDto(List<DealDto> allDeals) {
-        return allDeals.stream().map(dealDto -> dealDto.getDealFromDto()).collect(toList());
+        return allDeals.stream().map(DealDto::getDealFromDto).collect(toList());
 
     }
 

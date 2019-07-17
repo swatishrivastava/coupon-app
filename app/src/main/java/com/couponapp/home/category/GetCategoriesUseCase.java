@@ -1,7 +1,7 @@
 package com.couponapp.home.category;
 
 import com.couponapp.home.UseCase;
-import com.couponapp.home.deals.ICallback;
+import com.couponapp.home.deals.UseCaseCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +11,14 @@ import static java.util.stream.Collectors.toList;
 public class GetCategoriesUseCase implements UseCase, UseCase.Callback {
 
     private CategoryRespository categoryRespository;
-    private ICallback callback;
+    private UseCaseCallback callback;
 
     public GetCategoriesUseCase(CategoryRespository categoryRespository) {
         this.categoryRespository = categoryRespository;
     }
 
     @Override
-    public void execute(ICallback callback) {
+    public void execute(UseCaseCallback callback) {
         categoryRespository.fetchAllCategories(this);
         this.callback = callback;
     }

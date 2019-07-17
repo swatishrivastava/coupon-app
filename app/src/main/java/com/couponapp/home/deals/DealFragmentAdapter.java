@@ -15,15 +15,15 @@ import java.util.List;
 
 import example.couponapp.com.couponapp.R;
 
-public class DealFragmentAdapter
+public class DealFragmentAdapter<T>
         extends RecyclerView.Adapter<DealFragmentAdapter.DealViewHolder> {
 
-    private ArrayList<Deal> deals;
+    private List<NewDealInterface> deals;
     private View mView;
 
-    public DealFragmentAdapter(List<Deal> dealDtoListObj) {
+    public DealFragmentAdapter(List<NewDealInterface> dealDtoListObj) {
         super();
-        this.deals = (ArrayList<Deal>) dealDtoListObj;
+        this.deals = dealDtoListObj;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class DealFragmentAdapter
         }
     }
 
-    public void updateList(List<Deal> dealsList) {
+    public void updateList(List<NewDealInterface> dealsList) {
         deals.clear();
         deals.addAll(dealsList);
         notifyDataSetChanged();

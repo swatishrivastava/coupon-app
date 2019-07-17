@@ -17,7 +17,6 @@
 package com.couponapp.application;
 
 public interface BasePresenter {
-
     void start();
 
 

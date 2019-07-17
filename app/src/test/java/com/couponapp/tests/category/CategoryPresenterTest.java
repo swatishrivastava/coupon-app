@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 
 
 public class CategoryPresenterTest {
-    @Mock
+   /* @Mock
     private CategoryClientInterface categoryClientInterface;
     @Mock
     private CategoryContract.View mockView;
@@ -68,5 +68,5 @@ public class CategoryPresenterTest {
         categoryPresenter.fetchAllCategories();
         Mockito.verify(mockView).failedToGetCategory();
 
-    }
+    }*/
 }

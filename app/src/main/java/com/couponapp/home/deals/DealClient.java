@@ -13,6 +13,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class DealClient implements DealRepository {
+    public static final String LOGGER = DealClient.class.getName();
     private DealInterface service;
 
     public DealClient(Retrofit retrofit) {
@@ -22,19 +23,17 @@ public class DealClient implements DealRepository {
 
     @Override
     public void fetchAllDeals(UseCase.Callback callback) {
-        final List<DealDto> dealDtoList = new ArrayList<>();
         final Call<List<DealDto>> allDeals = service.getAllDeals();
         allDeals.enqueue(new Callback<List<DealDto>>() {
             @Override
             public void onResponse(Call<List<DealDto>> call, Response<List<DealDto>> response) {
-                dealDtoList.addAll(response.body());
-                callback.onSuccess(dealDtoList);
-                Log.e(DealClient.class.getName(), "Response from service" + response.body().toString());
+                Log.e(LOGGER, "Response from backend" + response.body().toString());
+                callback.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<List<DealDto>> call, Throwable t) {
-                Log.e(DealClient.class.getName(), t.getMessage());
+                Log.e(LOGGER, t.getMessage());
                 callback.onError(t);
             }
         });

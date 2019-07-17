@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.couponapp.home.category.CategoryForSelectedDeal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,7 +71,7 @@ public class DealsFragment extends Fragment implements DealContract.View {
         if (categoryName == null) {
             dealPresenter.fetchAllDeals();
         } else {
-            dealPresenter.fetchAllDealsByCategory(categoryName);
+           // dealPresenter.fetchAllDealsByCategory(categoryName);
         }
 
     }
@@ -84,7 +85,7 @@ public class DealsFragment extends Fragment implements DealContract.View {
     }
 
     @Override
-    public void showAllDeals(List<Deal> dealDtoList) {
+    public void showAllDeals(List<NewDealInterface> dealDtoList) {
         progressBar.setVisibility(View.GONE);
         progressText.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);

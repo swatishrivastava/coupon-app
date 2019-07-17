@@ -1,12 +1,12 @@
 package com.couponapp.home.category;
 
 import com.couponapp.home.UseCase;
-import com.couponapp.home.deals.ICallback;
+import com.couponapp.home.deals.UseCaseCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryPresenter implements CategoryContract.Presenter, ICallback {
+public class CategoryPresenter implements CategoryContract.Presenter, UseCaseCallback {
 
     private UseCase categoryUsecase;
     private CategoryContract.View view;
@@ -36,7 +36,7 @@ public class CategoryPresenter implements CategoryContract.Presenter, ICallback 
     }
 
     @Override
-    public void onSuccess(Object o) {
+    public <T> void onSuccess(List<T> o) {
         List<Category> categories = (ArrayList) o;
         if (categories.isEmpty()) {
             view.failedToGetCategory();

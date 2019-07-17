@@ -1,6 +1,6 @@
 package com.couponapp.home.deals;
 
-public class Deal {
+public class Deal implements NewDealInterface {
     private String companyName;
     private String description;
     private String category;
